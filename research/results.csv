@@ -1,5 +1,3 @@
-all of them left the location field empty
-
 A-baseline,yes,no,no,no,0/3,1/5,1/5,1/1,27/27,"mushed up links into one, messed up email, messed up phone number, mushed up all experiences into one, added skills sub heading to skills"
 B-two-column,yes,no,no,no,0/3,1/5,1/5,0/1,27/27,"mushed up links into one, messed up email, messed up phone number, mushed up all experiences into one, added skills sub heading to skills but listed skills with line breaks making it easier to read"
 C-header-contact,yes,no,no,no,0/3,1/5,1/5,1/1,27/27,"mushed up links into one, messed up email, messed up phone number, mushed up all experiences into one, added skills sub heading to skills but listed skills with line breaks making it easier to read, also messed up the education, made an achievement as a second education with a CGPA of 0.5"
@@ -8,3 +6,7 @@ E-section-names,yes,no,no,no,0/3,0/5,0/5,0/1,0/27,"mushed up everything into sum
 F-skills-table,yes,no,no,no,0/3,1/5,1/5,1/1,27/27,"mushed up links into one, messed up email, messed up phone number, mushed up all experiences into one, added skills sub heading to skills and listed all the skills without their subheading."
 G-no-unicode,yes,no,no,no,0/3,1/5,1/5,1/1,27/27,"mushed up links into one, messed up email, messed up phone number, mushed up all experiences into one, added skills sub heading to skills"
 H-dates,yes,no,no,no,0/3,1/5,1/5,1/1,27/27,"mushed up links into one, messed up email, messed up phone number, mushed up all experiences into one, added skills sub heading to skills"
+K-contact-spacing,yes,yes,no,no,1/3,1/5,1/5,1/1,27/27,"Email is perfect now, phone number is almost perfect, missing +90. description in education is wrong, work experience is mushed up and projects are scattered as well"
+L-job-spacing,yes,no,no,no,0/3,5/5,5/5,0/1,27/27,"Experiences and projects are not properly seperately displayed but no education, email, phone number and links are still being mushed"
+N-one-page,yes,no,no,no,0/3,1/5,1/5,1/1,27/27,"Email, phone number and location not being displayed properly, experience and projects are mushed up"
+M-fixed-baseline,yes,yes,no,no,1/3,5/5,5/5,1/1,27/27,"Experiences and projects are fine now. issues are incomplete links, only github link showing, no location and phone number missing +90"
