@@ -100,6 +100,11 @@ without changing a single word of content.
 - Evidence: icons become junk characters in raw text.
 - Confidence: medium
 - Skill should: replace icons with plain labels or nothing.
+
+### R8: Include the target job title, honestly. 
+- Evidence: in Affinda’s search, “frontend engineer” didn’t find a resume whose titles said “Software Developer.” - Confidence: medium (one test, one tool). 
+- Skill should: add a headline and summary opening with the target title, never change official titles.
+
 ## Parser limitations (not resume problems; don't "fix" these)
  
 - Location must look like `City, ST` (two capital letters): `Famagusta, Cyprus` never matches.
