@@ -10,3 +10,5 @@ B,Software Developer,no,yes,yes,yes,3/3,5/5,1/1,80,no,N/A
 D,Software Developer,no,no,yes,yes,3/3,5/5,1/1,85,no,gets found when I search "front" but not when I search "frontend"
 E,Software Developer,no,no,yes,yes,3/3,6/5,1/1,85,no,"gets found when I search software developer and software engineer"
 F,Software Developer,no,no,yes,yes,3/3,6/5,1/1,81,no,"gets found when I search software developer and software engineer. Added crow websockets creation for omniplexus to experiences"
+E1,Founder & Sole Developer,no,yes,yes,yes,3/3,6/5,1/1,79,no,"English and Turkish languages being listed. Found when Software engineer is searched and not by Software Developer"
+T5,Founder & Software Engineer (Frontend),no,no,yes,yes,3/3,6/5,1/1,86,no,"Found when Frontend is searched not frontend developer or frontend engineer. Found when software engineer is searched not software developer"

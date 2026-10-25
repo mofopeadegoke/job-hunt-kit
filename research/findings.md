@@ -25,96 +25,93 @@
 
 #Findings after testing with Open resume's parser
 # ATS parsing research: findings
- 
-Tested 12 versions of the same resume (same content, one change each) with:
-- `pdftotext` (raw text extraction)
-- OpenResume's resume parser (rule-based, single-column, English, US-oriented)
-Scored against `answer-sheet.md`. Raw scores are in `results.csv`.
- 
-> Scope: all parser results are from **one** rule-based parser. Rules marked "OpenResume only"
-> still need a second parser before they're treated as general.
- 
-## Headline result
- 
-The original resume lost its email, phone, links and all job boundaries in the parser,
-even though its raw text was perfect. Three small layout fixes (version M) took it from
-**1/5 jobs and a broken email** to **5/5 jobs, 5/5 dates, correct email and education**,
-without changing a single word of content.
- 
-| Field | A-baseline | M-fixed-baseline |
+
+Same resume content, one change per version, scored against an answer sheet.
+
+| Tool | Type | Versions tested |
 | --- | --- | --- |
-| Name | ✅ | ✅ |
-| Email | ❌ (`0000·name@example.com`) | ✅ |
-| Phone | ❌ | ⚠️ missing `+90` (parser limit) |
-| Location | ❌ | ❌ (parser limit) |
-| Links | 0/3 | 1/3 (parser limit) |
-| Jobs | 1/5 | 5/5 |
-| Dates | 1/5 | 5/5 |
-| Education | 1/1 (with achievements mixed in) | 1/1 |
-| Skills | 27/27 | 27/27 |
- 
+| `pdftotext` | Raw text extraction | All |
+| OpenResume | Rule-based parser (single-column, English, US-oriented) | A–H, K–N |
+| Affinda | Commercial, machine-learning parser with candidate search | A, M, Z, P, Q, T0–T5, G1–G3, B, D, E, F, E1 (Jane Doe copies) |
+
+Raw results: `results.csv` (OpenResume), `results-affinda.csv` (Affinda).
+
+## Headline results
+
+1. **A simple parser breaks on layout.** In OpenResume, the original resume lost its email,
+   phone, links and 4 of 5 jobs, even though its raw text was perfect. Three spacing fixes
+   (version M) recovered them without changing a word.
+2. **A commercial parser handles layout, but labels you by your latest job title.** Affinda
+   read every layout correctly (two columns, icons, tables, creative headings), but the role
+   it assigns is the most recent job title, word for word, and recruiter search depends on it.
+3. **Projects may be invisible.** Affinda never showed a Projects section in any version.
+   Moving Inscribe from Projects to Experience made it appear.
+
+## Rules for `ats-optimize`
+
+### Important (affects what recruiters see and search)
+
+**R8: The latest job title decides your role and search results**
+- Evidence (Affinda): role = most recent title, verbatim (T0–T5). A headline under the name
+  changed nothing (T3). A "frontend engineer" search found only "Founder & Frontend Engineer"
+  (T1); not "Software Developer (Frontend)" (T4) or "Software Engineer (Frontend)" (T5), which
+  were found by "frontend" alone. "Developer" and "engineer" were sometimes treated as
+  equivalent (E, F found by "software engineer"), but a specialty is never inferred.
+- Rule: the target title must appear **as a contiguous phrase** in the most recent job title.
+- Honesty: only on titles the user controls (self-employment, own company, freelance).
+  Never change a title an employer gave. Use one title consistently (resume and LinkedIn).
+- Confidence: high (Affinda); not yet tested elsewhere.
+
+**R9: Put key evidence in Experience, not only Projects**
+- Evidence (Affinda): Projects never shown (all versions). Inscribe appeared once moved to
+  Experience (P). Projects sometimes leak into Experience (F counted Omniplexus as a job).
+- Rule: real ongoing work (own product, freelance) goes in Experience; project skills must
+  also appear in Technical Skills / Summary.
+- Confidence: high (Affinda).
+
+**R10: Stack the Education block line by line**
+- Evidence (Affinda): GPA extracted only when school, degree, location/date and GPA were each
+  on their own line (B, E1). Not extracted with right-aligned (\hfill) lines, a "GPA:" label,
+  or a spelled-out degree (A, Q, G1–G3).
+- Confidence: medium-high (two versions, one tool).
+
+### Safe habits (required by simple parsers; harmless elsewhere)
+
+| Rule | OpenResume | Affinda |
+| --- | --- | --- |
+| R1: Standard section headings | Creative names lost every section (E) | No effect |
+| R2: Single column | Lost education (B) | No effect |
+| R3: Clear space around contact items | Email glued to phone: `0000·name@example.com` (A); fixed by wide gaps (K) | No effect |
+| R4: Visible space between entries (> 1.4x line gap) | 1/5 jobs (A) vs 5/5 (L, M) | No effect |
+| R5: One page, or no heading at the top of page 2 | Achievements merged into education; "GPA 0.5" from "Top 0.5%" (A); education lost (L) | No effect |
+| R6: No hyphenation | Raw text split "Mark-" / "down" | Possibly more skills found (Z: 85 vs 75) |
+| R7: No icons in contact details | Icons become junk letters (`m`, `H`, `B`) in raw text | No effect |
+
+### Other observations
+
+- Content can create false fields: "English/Turkish localization" was listed by Affinda as
+  spoken languages (E1). Review what a parser infers, not just what it extracts.
+- Spelling variants may matter in search: D was found by "front" but not "frontend".
+- OpenResume limits (not resume problems): location must look like `City, ST`; phone must
+  be US-format (`+90` dropped); only one link field.
+
 ## Hypotheses
- 
-| # | Hypothesis | Result | Evidence |
+
+| # | Hypothesis | OpenResume | Affinda |
 | --- | --- | --- | --- |
-| H1 | Two-column layouts are read in the wrong order | ✅ Confirmed | B lost education (0/1); raw text interleaves sidebar and job lines |
-| H2 | Contact details in the page header get lost | ❓ Untested on a fixed baseline | Raw text keeps header text; baseline contact was already broken |
-| H3 | Icons break contact extraction | ⚠️ Mixed | Raw text: icons become junk letters (`m`, `H`, `B`, `Ï`, `Z`). Parser: icons added spacing, which helped |
-| H4 | Unusual section names get misread | ✅ Confirmed (largest effect) | E: 0/5 jobs, 0/1 education, 0/27 skills |
-| H5 | Skills in a table get scrambled | ⚠️ Partly | F kept 27/27 skills but lost the categories |
-| H6 | Without `\pdfgentounicode`, letters go missing | ❌ Rejected (this setup) | G's raw text identical to A |
-| H7 | Date formats parse differently | ❓ Untested on a fixed baseline | Experience was already broken in round 1 |
- 
-## Rules (for `ats-optimize`)
- 
-### R1: Use standard section headings
-- Evidence: E lost every section. The parser identifies a section's type by keywords
-  (experience, education, skills, projects).
-- Confidence: high
-- Skill should: rename creative headings to standard ones.
-### R2: Use a single column
-- Evidence: B lost education; raw text mixes columns line by line.
-- Confidence: high (both tools)
-- Skill should: flag multi-column layouts and offer a single-column version.
-### R3: Give each contact item clear space (or its own line)
-- Evidence: separators closer than one character width are glued with no space,
-  producing `0000·name@example.com`. K (wide gaps) fixed the email.
-- Confidence: high (OpenResume only)
-- Skill should: check spacing around separators in the contact line.
-### R4: Leave visible space between jobs and projects
-- Evidence: a new entry is detected only when the line gap is > 1.4x the normal gap.
-  A (no extra gap) 1/5 jobs; L and M (6pt gap) 5/5 jobs.
-- Confidence: high (OpenResume only)
-- Skill should: add space between entries.
-### R5: Don't start a page with a section heading; prefer one page
-- Evidence: the first line of page 2 is glued onto the last line of page 1, so a heading
-  there isn't recognized. A: achievements merged into education (GPA "0.5" taken from
-  "Top 0.5%"). L: education lost when it moved to the top of page 2. M (one page): fixed.
-- Confidence: high (OpenResume only)
-- Skill should: keep tailored resumes to one page; if two, keep headings off page tops.
-### R6: Don't hyphenate across lines
-- Evidence: raw text split "Markdown" into "Mark-" / "down", which can break keyword search.
-- Confidence: medium (raw text only)
-- Skill should: turn off hyphenation (`\hyphenpenalty=10000`), never split skill names.
-### R7: No icons in contact details
-- Evidence: icons become junk characters in raw text.
-- Confidence: medium
-- Skill should: replace icons with plain labels or nothing.
+| H1 | Two columns are read in the wrong order | ✅ Confirmed | ❌ No effect |
+| H2 | Contact details in the page header get lost | ❓ | Not tested |
+| H3 | Icons break contact extraction | ⚠️ Mixed | ❌ No effect |
+| H4 | Unusual section names get misread | ✅ Confirmed (largest effect) | ❌ No effect |
+| H5 | Skills in a table get scrambled | ⚠️ Lost categories | ❌ No effect |
+| H6 | Without `\pdfgentounicode`, letters go missing | ❌ Rejected (this setup) | Not tested |
+| H7 | Date formats parse differently | ❓ | Not tested |
 
-### R8: Include the target job title, honestly. 
-- Evidence: in Affinda’s search, “frontend engineer” didn’t find a resume whose titles said “Software Developer.” - Confidence: medium (one test, one tool). 
-- Skill should: add a headline and summary opening with the target title, never change official titles.
+## Open questions
 
-## Parser limitations (not resume problems; don't "fix" these)
- 
-- Location must look like `City, ST` (two capital letters): `Famagusta, Cyprus` never matches.
-- Phone must look like a US number: `+90` is dropped.
-- Only one URL field: at most 1 of 3 links can be extracted.
-## Open questions / next tests
- 
-- [ ] Re-test C (header), D (icons), F (table) and H (dates) on top of M
-- [ ] Confirm R3–R5 with a second parser (commercial demo, "Jane Doe" copy only)
-- [ ] I-word.pdf and J-plain.pdf: does the authoring tool matter?
+- [ ] Does a "software engineer" search find "Founder & Frontend Engineer" (T1)?
+- [ ] Real ATS autofill (Workday, Greenhouse, Lever…) during real applications: log what each extracts
+- [ ] I-word.pdf / J-plain.pdf: does the authoring tool matter?
 
 
 
