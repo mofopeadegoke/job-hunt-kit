@@ -1,4 +1,4 @@
-# Hypotheses
+# Hypotheses for openResume's parser
 - H1: Two-column layouts get read in the wrong order
 - H2: Contact details in the page header or footer get lost
 - H3: Icons next to email/phone break their extraction
@@ -115,3 +115,19 @@ without changing a single word of content.
 - [ ] Re-test C (header), D (icons), F (table) and H (dates) on top of M
 - [ ] Confirm R3–R5 with a second parser (commercial demo, "Jane Doe" copy only)
 - [ ] I-word.pdf and J-plain.pdf: does the authoring tool matter?
+
+
+
+#Predictions
+- T0: Assigns Founder & Solo developer as Inscribe experience indicates
+- T1: Becomes Founder & Frontend Engineer
+- T2: Becomes Founder & Frontend Engineer
+- T3: Title remains the title of of the most recent job
+- T4: Project does not affect title
+- G1: No GPA
+- G2: No GPA
+- G3: No GPA
+- B: Education and jobs not found properly
+- E: It loses sections like OpenResume did
+- D: Email, phone and links not correct
+- F: Skills not found well Differences found

@@ -1,0 +1,12 @@
+T0,Founder & Sole Developer,no,no,yes,yes,3/3,6/5,1/1,81,no,N/A
+T1,Founder & Frontend Engineer,yes,no,yes,yes,3/3,6/5,1/1,84,no,N/A
+T2,Founder & Software Engineer,no,no,yes,yes,3/3,6/5,1/1,81,no,N/A
+T3,Founder & Sole Developer,no,no,yes,yes,3/3,6/5,1/1,82,no,N/A
+T4,Software Developer(Frontend),yes,no,yes,yes,3/3,5/5,1/1,79,no,"found for both software engineer, software developer and frontend not frontend engineer"
+G1,Founder & Sole Developer,no,no,yes,yes,3/3,6/5,1/1,82,no,N/A
+G2,Founder & Sole Developer,no,no,yes,yes,3/3,6/5,1/1,81,no,N/A
+G3,Founder & Sole Developer,no,no,yes,yes,3/3,6/5,1/1,80,no,N/A
+B,Software Developer,no,yes,yes,yes,3/3,5/5,1/1,80,no,N/A
+D,Software Developer,no,no,yes,yes,3/3,5/5,1/1,85,no,gets found when I search "front" but not when I search "frontend"
+E,Software Developer,no,no,yes,yes,3/3,6/5,1/1,85,no,"gets found when I search software developer and software engineer"
+F,Software Developer,no,no,yes,yes,3/3,6/5,1/1,81,no,"gets found when I search software developer and software engineer. Added crow websockets creation for omniplexus to experiences"
