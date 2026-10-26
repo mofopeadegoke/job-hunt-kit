@@ -1,0 +1,11 @@
+{
+  "name": "job-hunt-kit",
+  "displayName": "Job Hunt Kit",
+  "version": "0.1.0",
+  "description": "Tailor a LaTeX resume to a job posting for ATS parsers without adding anything untrue, and track applications.",
+  "author": {
+    "name": "Adegoke Mofopefoluwa Daniel"
+  },
+  "license": "MIT",
+  "keywords": ["resume", "ats", "job-search", "latex"]
+}

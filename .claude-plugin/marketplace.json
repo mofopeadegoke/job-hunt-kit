@@ -1,0 +1,14 @@
+{
+  "name": "job-hunt-kit",
+  "description": "Honest job-search tools for Claude Code",
+  "owner": {
+    "name": "Adegoke Mofopefoluwa Daniel"
+  },
+  "plugins": [
+    {
+      "name": "job-hunt-kit",
+      "source": "./plugins/job-hunt-kit",
+      "description": "Tailor a LaTeX resume to a job posting for ATS parsers without adding anything untrue, and track applications."
+    }
+  ]
+}
