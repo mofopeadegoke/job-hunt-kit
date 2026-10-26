@@ -1,0 +1,52 @@
+Frontend Engineer
+Pollen Analytics
+Remote (EMEA) · Full-time
+
+About Pollen
+Pollen builds analytics software that helps retail chains understand what sells, where and why.
+Over 300 retailers use our dashboards every day. We are a team of 60 spread across Europe, the
+Middle East and Africa, and we have been remote since day one.
+
+The role
+You will join our Product Experience team of five engineers and one designer. Together you own
+the web app our customers use every day: report builder, dashboards and the shared component
+library behind them. You will work closely with design and product to ship features, and you
+will care about how fast and accessible the app is.
+
+What you'll do
+- Build new features in our React and TypeScript web app, from design handoff to release
+- Grow and maintain our component library and its Storybook documentation
+- Write unit, component and end-to-end tests (Jest, React Testing Library, Playwright)
+- Improve performance and Core Web Vitals across the app
+- Make sure new work meets WCAG 2.1 AA
+- Review code and help teammates through pairing and feedback
+
+What we're looking for
+- 3+ years of professional experience building web apps with React and TypeScript
+- Experience building or maintaining a component library or design system
+- Solid testing habits: unit, component and end-to-end tests
+- Working knowledge of web accessibility (WCAG) and web performance
+- Comfortable consuming REST APIs
+- Clear written communication in English; most of our collaboration is async
+
+Nice to have
+- Next.js
+- Data visualization libraries (D3, Recharts, Visx)
+- GraphQL
+- Experience in B2B SaaS
+
+Location and hours
+This is a fully remote role. You can work from any country in EMEA where we can hire through
+our employer of record. You need at least 4 hours of overlap with 9:00–17:00 CET.
+
+What we offer
+- Competitive salary benchmarked to your location
+- 25 days of paid holiday plus local public holidays
+- Home office budget and a yearly learning budget
+- Two team meetups a year (travel and visas covered)
+
+Hiring process
+1. 30-minute intro call with our recruiter
+2. Take-home task (about 3 hours) and a follow-up conversation
+3. Technical interview with two engineers
+4. Values chat with the Head of Engineering

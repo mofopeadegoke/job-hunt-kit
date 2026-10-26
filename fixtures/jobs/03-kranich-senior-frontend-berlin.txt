@@ -1,0 +1,47 @@
+Senior Frontend Engineer (React) (m/f/d)
+Kranich Mobility GmbH
+Berlin, Germany · On-site · Full-time
+
+Who we are
+Kranich Mobility builds booking and fleet software for car-sharing and e-scooter operators in
+Germany, Austria and Switzerland. Our platform handles more than 2 million rides a month.
+
+Your mission
+As a Senior Frontend Engineer in our Operator Tools team, you will lead the frontend of the web
+app that operators use to manage their fleets, pricing and maintenance. You will set frontend
+standards for the team, mentor two mid-level engineers and work closely with our product
+designers and backend engineers.
+
+Your responsibilities
+- Lead the architecture of our React and TypeScript operator dashboard
+- Build real-time map and fleet views (WebSockets, Mapbox GL)
+- Set up and maintain our design system together with design
+- Own frontend quality: testing strategy, accessibility and performance
+- Mentor engineers and run frontend guild sessions
+
+Your profile
+- 5+ years of professional frontend development, with at least 3 years in React and TypeScript
+- Experience leading frontend architecture decisions in a product team
+- Strong testing experience (Jest, React Testing Library, Cypress or Playwright)
+- Experience with real-time data in the browser (WebSockets or similar)
+- German at C1 level or above: our team, customers and documentation work in German
+- Good English
+
+Important information
+- This role is on-site in our Berlin office, five days a week
+- You must already have the right to work in the EU. We are unable to offer visa sponsorship
+  for this position.
+
+Nice to have
+- Mapbox GL or other map libraries
+- Next.js
+- Experience in mobility or logistics
+
+What we offer
+- Salary range €75,000–€90,000
+- 30 days of vacation
+- BVG ticket and bike leasing
+- Relocation support within the EU
+- Modern office in Berlin-Kreuzberg with daily lunch
+
+Please send your CV in German or English. We look forward to hearing from you!

@@ -1,0 +1,94 @@
+\documentclass[10pt, letterpaper]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{iftex}
+\ifpdftex
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+\usepackage[none]{hyphenat}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{8pt}{4pt}
+
+\setlist[itemize]{leftmargin=*, noitemsep, topsep=0pt, parsep=0pt, itemsep=0.5pt}
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{center}
+    {\LARGE \textbf{JANE DOE}} \\ \vspace{2pt}
+    Nairobi, Kenya \quad$\cdot$\quad +254 700 000 000 \quad$\cdot$\quad \href{mailto:jane.doe@example.com}{jane.doe@example.com} \\
+    \href{https://github.com/janedoe-dev}{github.com/janedoe-dev} \quad$\cdot$\quad \href{https://www.linkedin.com/in/jane-doe-example}{linkedin.com/in/jane-doe-example} \\
+    \textit{Work Authorization:} Kenyan Citizen \quad$\cdot$\quad Remote Ready (GMT+3) \quad$\cdot$\quad Visa Required for Onsite Roles Abroad
+\end{center}
+
+\section*{Summary}
+Frontend developer with 4+ years of professional experience building React web apps and a React Native mobile app for a payments company and a health-tech startup. Builds reusable component libraries, improves page performance, and writes automated tests. Also runs a part-time freelance practice building Next.js websites for small businesses. Fluent in English, native Swahili speaker.
+
+\section*{Technical Skills}
+\textbf{Languages:} TypeScript, JavaScript (ES6+), HTML5, CSS3, SQL \\
+\textbf{Frontend:} React, Next.js, React Native, Tailwind CSS, Storybook \\
+\textbf{Backend:} Node.js, Express, REST APIs, PostgreSQL \\
+\textbf{Testing \& Tools:} Jest, React Testing Library, Git, GitHub Actions, Vercel, Figma \\
+\textbf{Spoken Languages:} English (fluent), Swahili (native), French (basic)
+
+\section*{Experience}
+
+\textbf{Brightleaf Labs} \hfill Nairobi, Kenya (Hybrid) \\
+\textit{Frontend Developer} \hfill Mar 2024 -- Present
+\begin{itemize}
+    \item Built and maintained the customer dashboard of a payments web app in React and TypeScript.
+    \item Helped migrate the checkout flow from JavaScript to TypeScript, working with two other developers.
+    \item Built about 15 reusable React components, documented in Storybook.
+    \item Improved dashboard load time by an estimated 20--30\% (Lighthouse lab data) through code splitting and image optimization.
+\end{itemize}
+
+\vspace{6pt}
+\textbf{Kijiji Health} \hfill Nairobi, Kenya \\
+\textit{Junior Web Developer} \hfill Jun 2022 -- Feb 2024
+\begin{itemize}
+    \item Built a React Native appointment booking app with about 1,200 monthly active users (mid-2023).
+    \item Built React pages for the clinic admin portal.
+    \item Added endpoints to a Node.js/Express REST API backed by PostgreSQL, reviewed by the backend developer.
+    \item Wrote unit tests with Jest and React Testing Library.
+\end{itemize}
+
+\vspace{6pt}
+\textbf{Tano Systems} \hfill Nairobi, Kenya \\
+\textit{Software Engineering Intern} \hfill Jun 2021 -- Sep 2021
+\begin{itemize}
+    \item Fixed accessibility issues in an internal dashboard toward WCAG 2.1 AA (colour contrast, keyboard navigation, form labels).
+\end{itemize}
+
+\section*{Projects}
+
+\textbf{Freelance Web Developer} $\cdot$ \textit{Self-employed, part-time} (Next.js, Tailwind CSS) \hfill Jan 2023 -- Present
+\begin{itemize}
+    \item Built 6 websites for small businesses with Next.js and Tailwind CSS.
+    \item Set up deployments on Vercel and basic analytics with Plausible.
+\end{itemize}
+
+\vspace{6pt}
+\textbf{Shamba Prices} $\cdot$ \textit{Side Project} (Next.js, Claude API, PostgreSQL) \hfill 2025
+\begin{itemize}
+    \item Built a chat assistant that answers crop price questions in English and Swahili, using the Claude API and a PostgreSQL database of market prices.
+    \item About 40 farmers used it during a 2-week pilot with a local cooperative.
+\end{itemize}
+
+\section*{Education}
+\textbf{Kilima University} \\
+B.Sc. Computer Science \\
+Nairobi, Kenya \quad$\cdot$\quad Graduated Dec 2021 \\
+Second Class Honours (Upper Division)
+
+\end{document}

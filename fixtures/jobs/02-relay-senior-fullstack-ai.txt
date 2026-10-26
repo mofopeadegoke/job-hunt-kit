@@ -1,0 +1,49 @@
+Senior Full-Stack Engineer (Next.js / AI)
+Relay
+Remote (worldwide) · Full-time · $140K–$180K base
+
+About us
+Relay builds an AI platform that automates sales and marketing work for agencies and small
+businesses. We're a remote team of about 20 and growing fast.
+
+What you'll build
+- Autonomous AI agents that plan, call tools and keep memory across conversations
+- Multi-step LLM workflows for client onboarding and personalization
+- An operations platform: dashboards, workflow automation and client management
+
+You'll own features end to end, from shaping the product idea to running it in production.
+Almost everything we build is new.
+
+How we work
+- AI-first development: we use Cursor, Claude Code and Codex every day
+- Trunk-based development with small pull requests that merge fast
+- A hands-on CTO who reviews code and pairs with the team
+- We ship quickly and iterate rather than writing long specs
+
+Our stack
+Next.js (App Router), tRPC, TypeScript, Tailwind CSS, shadcn/ui, Postgres, Vercel, Vercel AI SDK
+
+Must-haves
+- 4+ years of production experience with React/Next.js and TypeScript
+- You have owned full-stack features from idea to deploy
+- Comfortable with Postgres and serverless infrastructure
+- Hands-on experience building real LLM applications (not just calling an API in a demo)
+
+Strong signals
+- You use AI coding tools daily
+- Experience with multi-agent systems, RAG or other LLM features in production
+- Understanding of embeddings, vector search or agent architecture
+- You ship fast without dropping quality
+
+Not required
+- A specific degree
+- Whiteboard algorithm skills
+
+Why Relay
+- Fully remote, work from anywhere
+- Small team, high ownership, very little bureaucracy
+- Your work reaches customers within days
+
+How to apply
+Short application, no cover letter. If it's a fit, you'll have a technical conversation with one
+of our engineers within a week.
