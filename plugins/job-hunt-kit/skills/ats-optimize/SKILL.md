@@ -79,14 +79,25 @@ Compare each hard requirement in the posting with `facts.md`:
 Mark each **met**, **not met** or **unclear** (the user or employer must confirm), with the
 evidence. Give each requirement its own row, so one requirement's caveat can't soften another.
 
-If any is **not met**, this is a **hard stop**: end your reply with the knockouts (the
-requirement, what the profile says, and that recruiters and ATS knockout questions usually
-screen on it) and ask whether to tailor anyway. Write nothing beyond `job.txt` until the user
-answers. This holds even when the user said to work without them; tailoring for a role they
-can't get past screening for needs their explicit yes.
+A **not met** means different things for the two kinds of requirement:
 
-Done when every hard requirement in the posting has a status, and, if any is not met, the user
-has said to continue.
+- **Eligibility** (work authorization, on-site location, time zone, spoken language, a degree
+  the posting requires without "or equivalent experience"): the employer can't hire someone who
+  fails these, however good the resume. Any not met is a **hard stop**: end your reply with the
+  knockouts (the requirement, what the profile says, and that recruiters and ATS knockout
+  questions usually screen on it) and ask whether to tailor anyway. Write nothing beyond
+  `job.txt` until the user answers. This holds even when the user said to work without them;
+  tailoring for a role they can't get past screening for needs their explicit yes.
+- **Experience** (years, seniority): candidates a little short of these do get interviews, so
+  a shortfall makes the role a stretch, not a dead end. If the user already said to go ahead
+  (for example "tailor it anyway" or "make the calls you'd recommend"), continue, and state
+  each shortfall plainly in the Knockouts table of `report.md` and in your chat reply. If they
+  didn't, stop and ask as for eligibility.
+
+Never reword a shortfall so it sounds met.
+
+Done when every hard requirement in the posting has a status, and either nothing that needs
+the user's yes is not met, or the user has said to continue.
 
 ### 3. Parse check of the master
 

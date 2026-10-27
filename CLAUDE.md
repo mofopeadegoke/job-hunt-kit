@@ -85,7 +85,9 @@ job-hunt-kit/
 
 ### `ats-optimize` v1 flow
 The source of truth is `SKILL.md` (9 steps). In short: gather inputs → **knockout check first**
-(a failed knockout is a hard stop: report and ask before tailoring) → parse check → title (R8)
+(a failed eligibility knockout, like visa, location, time zone or language, is a hard stop:
+report and ask before tailoring; a years/seniority shortfall is reported plainly, and tailoring
+continues if the user already said to go ahead) → parse check → title (R8)
 → placement (R9) → keyword match (present / reword / move up / partial / gap) → write → verify
 (layout + line-by-line truth audit) → `report.md` citing fact IDs.
 
@@ -110,13 +112,20 @@ Deterministic checks go in scripts (reliable, testable); wording and judgment st
 - Plugin: steps 1–4 done (skeleton, Jane Doe fixtures with fictional postings, `check_layout.py`
   and `extract_text.py` with 31 unit tests, `ats-optimize` skill tried by hand on Pollen and
   Berlin). Step 5 evals: 7 cases; all plugin cases pass on Haiku after two fixes (knockout hard
-  stop, one row per requirement).
+  stop, one row per requirement). On Sonnet (3 runs each, Sonnet judge): berlin, master,
+  relay, typo 1.00; pollen 0.97 (every regex passes; the `report-judgement` LLM grader is
+  noisy). Sonnet exposed two eval/skill bugs: the knockout hard stop blocked a stretch role
+  the user had said to tailor anyway (now split into eligibility vs experience knockouts), and
+  pollen's grader wrongly required "no knockout not met" when Jane's TypeScript years are
+  borderline. Plain Sonnet with only `resume.tex` also scores 1.00 on the baseline cases (2
+  runs each): those regexes alone don't show the plugin's value; the knockout check, title and
+  placement choices, and the fact-cited report do.
 
 ## Next steps
 
 1. ~~Skeleton~~ · 2. ~~Profile format + fixtures~~ · 3. ~~`check_layout.py`~~ · 4. ~~SKILL.md~~
-5. **Evals:** finish the Sonnet check and the plain-Claude (resume-only) comparison; record the
-   numbers for the README.
+5. ~~Evals~~ (optional later: a baseline grader that checks knockouts and the report, so the
+   plain-Claude comparison measures what the plugin adds)
 6. **`track` skill + session-start follow-up hook.**
 7. **Publish:** push to GitHub, install fresh from the marketplace like a stranger, README
    (what it does, honesty rules, research findings), demo GIF, write-up.
