@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
 fixtures/*/applications/
+
+# Real resumes and their extracted text stay in a private folder outside the repo.
+research/resumes/
+research/extracted/
+research/*.tex
+research/*.pdf
+research/answer-sheet.md
