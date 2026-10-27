@@ -405,7 +405,8 @@ def main(argv: list[str] | None = None) -> int:
         ))
     else:
         # Windows consoles can't print every character a resume might contain.
-        sys.stdout.reconfigure(errors="replace")
+        if hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(errors="replace")
         print(format_text(args.tex, results))
     return 0 if passed else 1
 

@@ -116,3 +116,6 @@ Deterministic checks go in scripts (reliable, testable); wording and judgment st
 6. **`track` skill + session-start follow-up hook.**
 7. **Publish:** push to GitHub, install fresh from the marketplace like a stranger, README
    (what it does, honesty rules, research findings), demo GIF, write-up.
+   **claude.ai version:** a packaging script builds a zip of `ats-optimize` from the same source,
+   stripping Claude Code–only frontmatter (`argument-hint`; claude.ai rejects unknown keys).
+   Test it, upload it to claude.ai for real, and offer the download from Daniel's website.
