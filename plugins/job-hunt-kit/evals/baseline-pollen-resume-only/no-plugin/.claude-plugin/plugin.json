@@ -1,0 +1,5 @@
+{
+  "name": "no-plugin-baseline",
+  "version": "0.0.0",
+  "description": "Empty stand-in so a case can measure plain Claude with no skill loaded."
+}

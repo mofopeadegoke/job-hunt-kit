@@ -21,8 +21,10 @@ exaggerating anything**, plus the learning that comes from building and evaluati
    Never inflate ("helped" → "led", "estimated 10–20%" → "20%", "about 10" → "10+").
 2. **Employer job titles are never changed.** Only titles the user controls (own company,
    self-employment, freelance) may be adjusted, and only to another true description.
-3. **Privacy.** No real personal data in this repo. Test fixtures use "Jane Doe" with fake
-   contact details. The plugin never uploads resumes anywhere; everything runs locally.
+3. **Privacy.** No real personal data in this repo (the repo is public). Test fixtures use the
+   fictional "Jane Doe". The plugin sends the resume nowhere except to Claude itself; describe
+   it that way, not as "everything runs locally". Daniel's real research resumes live outside
+   the repo (private folder) and were purged from git history.
 4. **Honest about odds.** Knockout criteria (visa, time zone, years, language) are reported
    plainly, not hidden.
 
@@ -65,13 +67,14 @@ job-hunt-kit/
         references/rules.md                 ← the rulebook above, in checklist form
         references/profile-format.md        ← how users describe themselves
         scripts/check_layout.py             ← deterministic checks on a .tex file
-        scripts/extract_text.sh             ← pdftotext wrapper for the parse check
+        scripts/extract_text.py             ← compile (if LaTeX exists) + pdftotext; .py so it runs on Windows
       track/
         SKILL.md                            ← application log, interview rate, follow-ups
     hooks/                                  ← follow-up reminder at session start (later)
     evals/                                  ← claude plugin eval suite
-  research/                                 ← findings, results, answer sheets, test resumes
-  fixtures/                                 ← Jane Doe profile, resumes, job postings
+  research/                                 ← findings and result CSVs (raw resumes are private)
+  fixtures/                                 ← Jane Doe profile, fictional job postings, answer key
+  tests/                                    ← unittest for the scripts: python -m unittest discover tests
 ```
 
 ### Profile format (lives OUTSIDE the plugin, in the user's own folder)
@@ -81,38 +84,39 @@ job-hunt-kit/
 - Later: `applications.csv` for the `track` skill (schema in `research/applications-README.md`)
 
 ### `ats-optimize` v1 flow
-1. Read the profile and the job description.
-2. **Parse check:** compile/extract text with `pdftotext`; run `check_layout.py` on the `.tex`
-   (safe habits R1–R7, R10).
-3. **Title check (R8):** does the most recent title contain the job's title as a phrase? If not,
-   suggest only honest options (user-controlled titles). Report mismatches.
-4. **Placement check (R9):** key evidence in Experience; project skills mirrored in Skills.
-5. **Keyword gaps:** required skills sorted into reword / move up / gap (never add).
-6. **Knockout check:** visa, time zone, years, language, degree.
-7. **Output:** tailored one-page `.tex`, compiled PDF, and a report where every change cites the
-   profile line that supports it.
+The source of truth is `SKILL.md` (9 steps). In short: gather inputs → **knockout check first**
+(a failed knockout is a hard stop: report and ask before tailoring) → parse check → title (R8)
+→ placement (R9) → keyword match (present / reword / move up / partial / gap) → write → verify
+(layout + line-by-line truth audit) → `report.md` citing fact IDs.
 
 Deterministic checks go in scripts (reliable, testable); wording and judgment stay with Claude.
+
+### Evals (`plugins/job-hunt-kit/evals/`)
+- Run: `claude plugin eval plugins/job-hunt-kit --scaffold --allow-tools Write Edit --no-publish`
+  (add `--model haiku` for cheap iteration, `--judge-model sonnet` because a Haiku judge misgrades).
+- No Bash in cases: native Windows has no sandbox, so granting Bash refuses every run. The skill
+  falls back to checking rules by reading the `.tex`.
+- No custom-code graders exist, so layout and truth rules are regexes over `out/resume.tex`.
+  Check new regexes for free with Node against a known-good resume and broken copies first.
+- `baseline-*` cases load an empty stand-in plugin (a `no-plugin/` folder inside each case; the
+  tool rejects one outside the case folder) and give plain
+  Claude only `resume.tex`: the realistic "no plugin" comparison. The normal without-arm still
+  gets `facts.md`, which already does much of the honesty work.
 
 ## Status
 
 - Research: done (see findings). Daniel's own master resume follows all rules (v3).
 - Applications: logged in `applications.csv` (kept privately, not committed).
-- Plugin: not started.
+- Plugin: steps 1–4 done (skeleton, Jane Doe fixtures with fictional postings, `check_layout.py`
+  and `extract_text.py` with 31 unit tests, `ats-optimize` skill tried by hand on Pollen and
+  Berlin). Step 5 evals: 7 cases; all plugin cases pass on Haiku after two fixes (knockout hard
+  stop, one row per requirement).
 
 ## Next steps
 
-1. **Skeleton:** marketplace.json, plugin.json, empty skill folders; load with
-   `claude --plugin-dir ./plugins/job-hunt-kit` and confirm the skills appear.
-2. **Profile format + Jane Doe fixtures:** `fixtures/jane-doe/resume.tex`, `facts.md`, and 3 real
-   job postings saved as text.
-3. **`check_layout.py`:** checks for standard headings, no tables/columns/icons, `\vspace` between
-   entries, stacked Education (no `\hfill` in Education), hyphenation off, one page (via
-   `pdfinfo`). Unit-test it against the research versions (A should fail, M/v3 should pass).
-4. **`ats-optimize` SKILL.md** following the flow above; try it on the fixtures.
-5. **Evals** (`claude plugin eval`): truthfulness (LLM judge vs `facts.md`), layout rules
-   (`check_layout.py` on the output), employer titles unchanged, triggering, no-plugin baseline.
-   Iterate on the skill until it passes.
+1. ~~Skeleton~~ · 2. ~~Profile format + fixtures~~ · 3. ~~`check_layout.py`~~ · 4. ~~SKILL.md~~
+5. **Evals:** finish the Sonnet check and the plain-Claude (resume-only) comparison; record the
+   numbers for the README.
 6. **`track` skill + session-start follow-up hook.**
 7. **Publish:** push to GitHub, install fresh from the marketplace like a stranger, README
    (what it does, honesty rules, research findings), demo GIF, write-up.
