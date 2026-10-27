@@ -42,7 +42,8 @@ These outrank anything the posting asks for.
   `python3 "${CLAUDE_SKILL_DIR}/scripts/extract_text.py" resume.pdf`
   Exit 3 = no LaTeX engine or `pdftotext`; 4 = LaTeX failed to compile.
 
-Use `python` instead of `python3` on Windows.
+Use `python` instead of `python3` on Windows. Where no shell tool is available, check the same
+rules by reading the `.tex` against rules.md, and say in the report that the scripts weren't run.
 
 ## Steps
 
@@ -54,8 +55,9 @@ Use `python` instead of `python3` on Windows.
   unconfirmed draft is not a source of truth.
 - **Job posting:** $ARGUMENTS, or pasted text, a file or a link. For a link, fetch it; if the
   result is a summary or cut short, ask the user to paste the full posting.
-- **Application folder:** create `<profile>/applications/<YYYY-MM-DD>-<company>-<role>/`
-  (lowercase, hyphens) and save the posting there as `job.txt`. All output goes here; the master
+- **Application folder:** the folder the user names, else create
+  `<profile>/applications/<YYYY-MM-DD>-<company>-<role>/` (lowercase, hyphens). Save the posting
+  there as `job.txt`. All output goes here; the master
   `resume.tex` stays untouched.
 
 Done when the profile is confirmed and the full posting is saved.
