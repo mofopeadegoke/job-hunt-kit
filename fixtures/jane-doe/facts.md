@@ -78,6 +78,8 @@ these facts, but it may not add anything that isn't here. Numbers must keep thei
 | React | Professional since Jun 2022 | BL-1, KH-2 |
 | TypeScript | Professional since Mar 2024; freelance since Jan 2023 | BL-1, BL-2, FR-4 |
 | JavaScript | Professional since Jun 2022 | KH-5 |
+| HTML5, CSS3 | Professional since Jun 2022 (all web work) | BL-1, KH-2, FR-1 |
+| SQL | Professional (PostgreSQL); side project | KH-3, SP-1 |
 | Next.js | Freelance since Jan 2023; side project | FR-1, SP-3 |
 | React Native | Professional, Jun 2022 – Feb 2024 | KH-1 |
 | Tailwind CSS | Freelance | FR-1 |
