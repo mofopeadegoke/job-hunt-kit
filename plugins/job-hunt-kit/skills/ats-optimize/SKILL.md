@@ -77,11 +77,16 @@ Compare each hard requirement in the posting with `facts.md`:
 | Seniority ("Senior", "Lead") | Titles and responsibilities |
 
 Mark each **met**, **not met** or **unclear** (the user or employer must confirm), with the
-evidence. If any is **not met**, tell the user now, plainly: the requirement, what the profile
-says, and that recruiters and ATS knockout questions usually screen on it. Ask whether to
-continue before tailoring.
+evidence. Give each requirement its own row, so one requirement's caveat can't soften another.
 
-Done when every hard requirement in the posting has a status.
+If any is **not met**, this is a **hard stop**: end your reply with the knockouts (the
+requirement, what the profile says, and that recruiters and ATS knockout questions usually
+screen on it) and ask whether to tailor anyway. Write nothing beyond `job.txt` until the user
+answers. This holds even when the user said to work without them; tailoring for a role they
+can't get past screening for needs their explicit yes.
+
+Done when every hard requirement in the posting has a status, and, if any is not met, the user
+has said to continue.
 
 ### 3. Parse check of the master
 
