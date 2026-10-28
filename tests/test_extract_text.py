@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "plugins/job-hunt-kit/skills/ats-optimize/scripts/extract_text.py"
 JANE_TEX = ROOT / "fixtures/jane-doe/resume.tex"
 JANE_PDF = ROOT / "fixtures/jane-doe/resume.pdf"
+JANE_WORD = ROOT / "fixtures/jane-doe/word"
 
 spec = importlib.util.spec_from_file_location("extract_text", SCRIPT)
 extract_text = importlib.util.module_from_spec(spec)
@@ -100,6 +101,11 @@ class Docx(unittest.TestCase):
                          + para(t("Frontend Developer"), "<w:r><w:br/></w:r>", t("Nairobi")))
         self.assertEqual(self.text(path), "Brightleaf Labs\tMar 2024 – Present\nFrontend Developer\nNairobi\n")
 
+    def test_tab_stop_setting_is_not_a_tab(self):
+        stop = '<w:pPr><w:tabs><w:tab w:val="right" w:pos="10800"/></w:tabs></w:pPr>'
+        path = make_docx(self.tmp, para(stop, t("Brightleaf Labs"), "<w:r><w:tab/></w:r>", t("Nairobi")))
+        self.assertEqual(self.text(path), "Brightleaf Labs\tNairobi\n")
+
     def test_header_comes_first(self):
         path = make_docx(self.tmp, para(t("Experience")), header=para(t("JANE DOE · +254 700 000 000")))
         self.assertEqual(self.text(path).splitlines(), ["JANE DOE · +254 700 000 000", "Experience"])
@@ -140,6 +146,34 @@ class Docx(unittest.TestCase):
             code, _, err = run(path)
         self.assertEqual(code, 3)
         self.assertIn("Save As .docx or PDF", err)
+
+
+class RealWordFile(unittest.TestCase):
+    """Jane Doe's resume saved by Microsoft Word itself, not a hand-built test file."""
+
+    def setUp(self):
+        self.text = extract_text.extract_docx(JANE_WORD / "resume.docx")
+
+    def test_header_contact_and_hidden_links(self):
+        lines = self.text.splitlines()
+        self.assertEqual(lines[0], "JANE DOE")
+        self.assertIn("jane.doe@example.com", lines[1])
+        self.assertIn("<https://www.linkedin.com/in/jane-doe-example>", lines[2])
+
+    def test_table_and_tab_aligned_dates(self):
+        self.assertIn("Testing & Tools\nJest, React Testing Library", self.text)
+        self.assertIn("Brightleaf Labs\tNairobi, Kenya (Hybrid)\nFrontend Developer\tMar 2024 – Present", self.text)
+
+    def test_every_bullet_and_no_stray_tabs(self):
+        self.assertIn("Built about 15 reusable React components, documented in Storybook.", self.text)
+        self.assertIn("Second Class Honours (Upper Division)", self.text)
+        self.assertFalse([line for line in self.text.splitlines() if line.startswith("\t")])
+
+    @unittest.skipUnless(shutil.which("pdftotext"), "needs pdftotext")
+    def test_word_pdf_keeps_words_but_not_link_addresses(self):
+        text = extract_text.extract_text(JANE_WORD / "resume.pdf")
+        self.assertIn("Built about 15 reusable React components", text)
+        self.assertNotIn("linkedin.com/in/jane-doe-example", text)
 
 
 if __name__ == "__main__":

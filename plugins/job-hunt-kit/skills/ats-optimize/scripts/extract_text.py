@@ -95,10 +95,12 @@ def link_targets(docx: zipfile.ZipFile, part: str) -> dict[str, str]:
 
 def paragraph_text(p: ElementTree.Element, links: dict[str, str]) -> str:
     parts = []
+    # A tab-stop setting (<w:tabs><w:tab/></w:tabs>) has the same tag as a typed tab.
+    stops = {id(stop) for tabs in p.iter(f"{W}tabs") for stop in tabs}
     for node in p.iter():
         if node.tag == f"{W}t":
             parts.append(node.text or "")
-        elif node.tag == f"{W}tab":
+        elif node.tag == f"{W}tab" and id(node) not in stops:
             parts.append("\t")
         elif node.tag in (f"{W}br", f"{W}cr"):
             parts.append("\n")

@@ -8,8 +8,14 @@ fixtures/
   jane-doe/           ← a profile, laid out exactly like a user's own folder
     resume.tex
     facts.md
+    word/             ← the same resume saved by Microsoft Word (.docx, .pdf, .doc)
   jobs/               ← job postings as plain text
 ```
+
+`word/` holds the same words as `resume.tex`, laid out the way Word templates often are: contact
+details in the page header, GitHub/LinkedIn as links whose address is hidden, skills in a borderless
+table, dates on right-aligned tab stops. `make_word_fixture.ps1` rebuilds it (Windows with Word
+installed) and clears the author fields Word copies from the Office account.
 
 The job postings are written for this repo, modelled on real 2026 postings (a remote EMEA
 frontend role, the Acquisity "Senior Full-Stack Engineer (Next.js / AI)" posting on Workable, and
