@@ -95,10 +95,13 @@ Deterministic checks go in scripts (reliable, testable); wording and judgment st
 
 ### `track` and the hook
 `track.py` owns the log (ids, follow-up = applied + 3 days, due list, rates); SKILL.md always
-calls it. The SessionStart hook uses exec form (`command` + `args`, no shell): Claude Code here
-can't find Git Bash (installed under `AppData\Local\Programs\Git`), so `"shell": "bash"` hooks
-fail. It starts `python3` and `python` both, since either may be the real one (Windows'
-`python3` is often a Store stub); a per-session stamp file lets only the first speak. Test with
+calls it. The SessionStart hook is ONE shell-form command with `"shell": "powershell"`:
+`Set-Alias python3 python; python3 ".../track.py" hook`. On Windows (PowerShell) the alias
+beats the Microsoft Store `python3` stub; on macOS/Linux (bash, assumed: the docs only describe
+the setting on Windows; check in step 7) `Set-Alias` is an unknown command and `python3` runs.
+Hooks can't be marked "allowed to fail": every failing hook shows a "SessionStart hook error",
+so two hooks (python3 + python) showed one error on every machine. Claude Code here can't find
+Git Bash (under `AppData\Local\Programs\Git`), so bash-only hooks fail. Test with
 `claude -p ... --plugin-dir plugins/job-hunt-kit --debug --debug-file <log>`.
 
 ### Evals (`plugins/job-hunt-kit/evals/`)

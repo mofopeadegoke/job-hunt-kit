@@ -6,10 +6,8 @@ import contextlib
 import importlib.util
 import io
 import json
-import os
 import sys
 import tempfile
-import time
 import unittest
 from datetime import date
 from pathlib import Path
@@ -163,24 +161,6 @@ class Hook(LogTest):
     def test_accepts_input_piped_by_windows_powershell(self):
         self.add(company="A", role="R", date_applied="2026-10-20")
         self.assertIn("systemMessage", track.hook("﻿" + json.dumps({"cwd": str(self.dir)}), MON))
-
-    def test_only_the_first_python_speaks_per_session(self):
-        self.add(company="A", role="R", date_applied="2026-10-20")
-        stamps = Path(tempfile.mkdtemp())
-        payload = json.dumps({"cwd": str(self.dir), "session_id": "abc-123"})
-        self.assertIn("systemMessage", track.hook(payload, MON, stamps))
-        self.assertEqual(track.hook(payload, MON, stamps), "")
-        other = json.dumps({"cwd": str(self.dir), "session_id": "def-456"})
-        self.assertIn("systemMessage", track.hook(other, MON, stamps))
-
-    def test_speaks_again_on_a_later_resume(self):
-        self.add(company="A", role="R", date_applied="2026-10-20")
-        stamps = Path(tempfile.mkdtemp())
-        payload = json.dumps({"cwd": str(self.dir), "session_id": "abc-123"})
-        track.hook(payload, MON, stamps)
-        old = time.time() - track.STAMP_SECONDS - 5
-        os.utime(stamps / "job-hunt-kit-abc-123", (old, old))
-        self.assertIn("systemMessage", track.hook(payload, MON, stamps))
 
     def test_silent_on_bad_input(self):
         self.log.write_text("company,role\nA,R\n", encoding="utf-8")
