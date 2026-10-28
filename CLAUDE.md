@@ -66,6 +66,7 @@ job-hunt-kit/
         SKILL.md                            ← instructions (the core)
         references/rules.md                 ← the rulebook above, in checklist form
         references/profile-format.md        ← how users describe themselves
+        references/resume-template.tex      ← Jane's layout with {{placeholders}}; PDF/Word resumes are converted into it
         scripts/check_layout.py             ← deterministic checks on a .tex file
         scripts/extract_text.py             ← compile (if LaTeX exists) + pdftotext; .py so it runs on Windows
       track/

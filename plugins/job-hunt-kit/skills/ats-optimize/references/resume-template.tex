@@ -1,0 +1,102 @@
+% Job Hunt Kit resume template: the layout every converted resume uses.
+% It passes check_layout.py (rules R1-R7, R10) and compiles on Overleaf as it is.
+%
+% Filling it from a PDF or Word resume:
+% - Copy the person's words exactly. Only the layout changes: no rewording, no new words,
+%   nothing dropped. Keep their section order and their own heading words.
+% - Keep the preamble (everything before \begin{document}) unchanged.
+% - Replace each {{placeholder}} (braces included) and each example address.
+% - Repeat a block once per job, project or degree, with \vspace{6pt} between blocks.
+%   Delete a line or section the person doesn't have; never fill it with a guess.
+% - Escape LaTeX's special characters in their text:
+%     & -> \&    % -> \%    $ -> \$    # -> \#    _ -> \_    { -> \{    } -> \}
+%     ~ -> \textasciitilde{}    ^ -> \textasciicircum{}    \ -> \textbackslash{}
+%   A line that starts with [ right after \\ or \item needs {} in front: \item {}[2024] ...
+% - Date ranges use -- ("Mar 2024 -- Present"). Separators between fields are
+%   \quad$\cdot$\quad on contact lines and $\cdot$ inside entries. Bullet characters
+%   from the original go: itemize draws the bullets.
+% - Links: \href{https://full-address}{address-without-https}. When the original showed only
+%   a word ("LinkedIn") over a hidden address, show the address so parsers can read it.
+\documentclass[10pt, letterpaper]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{iftex}
+\ifpdftex
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+\usepackage[none]{hyphenat}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+}
+
+\titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{8pt}{4pt}
+
+\setlist[itemize]{leftmargin=*, noitemsep, topsep=0pt, parsep=0pt, itemsep=0.5pt}
+
+\begin{document}
+\pagestyle{empty}
+
+% Contact: one line per line of the original, fields joined by \quad$\cdot$\quad.
+\begin{center}
+    {\LARGE \textbf{{{FULL NAME}}}} \\ \vspace{2pt}
+    {{City, Country}} \quad$\cdot$\quad {{Phone}} \quad$\cdot$\quad \href{mailto:name@example.com}{name@example.com} \\
+    \href{https://github.com/your-name}{github.com/your-name} \quad$\cdot$\quad \href{https://www.linkedin.com/in/your-name}{linkedin.com/in/your-name} \\
+    {{Work authorization or other header line, if the original has one}}
+\end{center}
+
+\section*{Summary}
+{{Summary paragraph, word for word.}}
+
+% Skills: the person's own group labels. With no groups on the original, one plain list, no label.
+\section*{Technical Skills}
+\textbf{{{Group}}:} {{Skill}}, {{Skill}}, {{Skill}} \\
+\textbf{{{Group}}:} {{Skill}}, {{Skill}}, {{Skill}}
+
+% Experience: company line, then title line. Several roles at one company: one title line
+% (with its own dates and bullets) per role under a single company line.
+\section*{Experience}
+
+\textbf{{{Company}}} \hfill {{Location}} \\
+\textit{{{Job Title}}} \hfill {{Mon YYYY}} -- {{Mon YYYY or Present}}
+\begin{itemize}
+    \item {{Bullet, word for word.}}
+    \item {{Bullet, word for word.}}
+\end{itemize}
+
+\vspace{6pt}
+\textbf{{{Company}}} \hfill {{Location}} \\
+\textit{{{Job Title}}} \hfill {{Mon YYYY}} -- {{Mon YYYY}}
+\begin{itemize}
+    \item {{Bullet, word for word.}}
+\end{itemize}
+
+\section*{Projects}
+
+\textbf{{{Project or role}}} $\cdot$ \textit{{{Kind, e.g. Side Project}}} ({{Tools, if listed}}) \hfill {{Dates}}
+\begin{itemize}
+    \item {{Bullet, word for word.}}
+\end{itemize}
+
+% Education: stacked, one fact per line, no \hfill (rule R10). \vspace{6pt} between schools.
+\section*{Education}
+\textbf{{{School}}} \\
+{{Degree}} \\
+{{Location}} \quad$\cdot$\quad {{Graduation date}} \\
+{{GPA, honours or other line, if the original has one}}
+
+% Any other section (Certifications, Awards, Volunteering, Languages...): the original's
+% heading, then its lines as entries like above, or as a list.
+\section*{Certifications}
+\begin{itemize}
+    \item {{Certification}} $\cdot$ {{Issuer}} $\cdot$ {{Date}}
+\end{itemize}
+
+\end{document}
