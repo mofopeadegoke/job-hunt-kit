@@ -22,6 +22,9 @@ These outrank anything the posting asks for.
   stays an estimated range.
 - Keep every verb at its strength or weaker: "helped" stays "helped" or "worked with";
   "mentored 1 intern" stays one intern.
+- A years figure covers only what it was counted for. If React has 4+ years and TypeScript fewer,
+  "4+ years of React and TypeScript" and "4+ years building React apps in TypeScript" both claim
+  4+ years of TypeScript. Name the shorter skill in its own sentence, or with its own years.
 - Copy employer titles character for character. A title the user controls may only become one of
   the alternatives listed for it.
 - Leave everything on the "Never claim" list out of the resume, summary and skills.
@@ -159,7 +162,8 @@ ones to fit one page. Keep the master's preamble and layout commands.
   R5 included (one page). Fix and re-run until it does.
 - **Text:** `extract_text.py` output reads cleanly, as in step 3.
 - **Truth audit,** line by line through the tailored `.tex`: every bullet, summary sentence and
-  skill maps to fact IDs; every number matches its `facts.md` wording; every employer title
+  skill maps to fact IDs; every number matches its `facts.md` wording; every years figure is
+  attached only to skills with that many years (Skills table); every employer title
   matches `facts.md` exactly; no "Never claim" item appears. Revert anything that fails to the
   fact's wording, or remove it.
 

@@ -117,15 +117,18 @@ Deterministic checks go in scripts (reliable, testable); wording and judgment st
   noisy). Sonnet exposed two eval/skill bugs: the knockout hard stop blocked a stretch role
   the user had said to tailor anyway (now split into eligibility vs experience knockouts), and
   pollen's grader wrongly required "no knockout not met" when Jane's TypeScript years are
-  borderline. Plain Sonnet with only `resume.tex` also scores 1.00 on the baseline cases (2
-  runs each): those regexes alone don't show the plugin's value; the knockout check, title and
-  placement choices, and the fact-cited report do.
+  borderline. Plugin vs plain Claude (Sonnet, 3 runs each, identical graders on the resume and
+  chat reply): Pollen 0.96 vs 0.50, Relay 0.95 vs 0.50. Plain Claude kept employer titles and
+  added no never-claim skills, but every run attached "4+ years" to TypeScript/Next.js, left
+  freelance in Projects (R9), skipped the R8 title, and didn't warn about the TypeScript years.
+  The plugin's own summaries did the same "4+ years … in TypeScript" until SKILL.md got a rule
+  that a years figure covers only what it was counted for. LLM judges stay noisy (one 3-vote
+  FAIL per case in some runs); the regexes are stable.
 
 ## Next steps
 
 1. ~~Skeleton~~ · 2. ~~Profile format + fixtures~~ · 3. ~~`check_layout.py`~~ · 4. ~~SKILL.md~~
-5. ~~Evals~~ (optional later: a baseline grader that checks knockouts and the report, so the
-   plain-Claude comparison measures what the plugin adds)
+5. ~~Evals~~
 6. **`track` skill + session-start follow-up hook.**
 7. **Publish:** push to GitHub, install fresh from the marketplace like a stranger, README
    (what it does, honesty rules, research findings), demo GIF, write-up.
