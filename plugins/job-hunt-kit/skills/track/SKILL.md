@@ -41,7 +41,7 @@ Leave the rest blank; a blank is honest, a guess is not.
 | `location_terms` | Remote / hybrid / on-site, region, visa or time-zone terms. |
 | `ats` | The applicant tracking system, when the link shows it (greenhouse.io, lever.co, myworkdayjobs.com, ashbyhq.com…). |
 | `resume_version` | The tailored resume's path (the application folder), or `master`. |
-| `inscribe_title` | The latest job title as written on the resume sent. |
+| `inscribe_title` | The job title of the first entry under Experience on the resume sent (the title ATS parsers take as the current role). |
 | `tailored` | `yes` or `no`. |
 | `status` | `applied`, `screening`, `interview`, `offer`, `rejected`, `withdrawn` or `ghosted`. |
 | `response_date`, `response_type` | When and how the employer replied: `screening`, `interview`, `rejection`, `offer`. |
@@ -84,8 +84,9 @@ Done when the row matches what the user reported.
 3. For one with 2 or more follow-ups and no reply, suggest marking it `ghosted`, and change it
    only on the user's yes.
 4. If the user asks for a follow-up message, keep it short: the role, the date applied, and one
-   reason they fit, taken from that application's `report.md` or `facts.md`. The message makes
-   only claims those files support.
+   reason they fit, taken from that application's `report.md` or `facts.md`. Quote each fact in
+   its own words: numbers, verbs and terms stay as written ("about 15 reusable React components"
+   stays that, never "component libraries"), and years come only from the Skills table.
 
 Done when the user has the list, and every change they asked for is in the log.
 

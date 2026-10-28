@@ -137,7 +137,11 @@ fail. It starts `python3` and `python` both, since either may be the real one (W
 
 1. ~~Skeleton~~ · 2. ~~Profile format + fixtures~~ · 3. ~~`check_layout.py`~~ · 4. ~~SKILL.md~~
 5. ~~Evals~~
-6. **`track` skill + session-start follow-up hook.**
+6. ~~`track` skill + session-start follow-up hook~~ (`track.py` + 24 unit tests; 3 eval cases:
+   log, replies, ghosted-needs-yes. Sonnet 1.00 on all three; Haiku 1.00 / 0.93 / 1.00, its one
+   slip being a rejection after an interview losing `response_type=interview` in 1 of 3 runs.
+   LLM graders for notes list every relevant fact and allow paraphrase: a partial fact list
+   made the judge fail honest notes.)
 7. **Publish:** push to GitHub, install fresh from the marketplace like a stranger, README
    (what it does, honesty rules, research findings), demo GIF, write-up.
    **claude.ai version:** a packaging script builds a zip of `ats-optimize` from the same source,
