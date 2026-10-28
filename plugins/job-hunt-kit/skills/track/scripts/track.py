@@ -14,7 +14,10 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import sys
+import tempfile
+import time
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -27,6 +30,7 @@ REQUIRED = ["id", "date_applied", "company", "role", "status", "follow_up_date",
 STATUSES = ["applied", "screening", "interview", "offer", "rejected", "withdrawn", "ghosted"]
 FOLLOW_UP_DAYS = 3
 LOG_NAME = "applications.csv"
+STAMP_SECONDS = 30
 
 
 class BadInput(Exception):
@@ -163,11 +167,29 @@ def describe(row: dict[str, str], today: date) -> str:
     return f"#{row['id']} {row['company']}, {row['role']}: {since}{chased}"
 
 
-def hook(stdin: str, today: date) -> str:
+def first_to_speak(session_id: str, stamp_dir: Path) -> bool:
+    # hooks.json starts the hook under both `python3` and `python`, since either name may be the
+    # real Python. Where both work, the first claims the session and the second stays silent.
+    stamp = stamp_dir / f"job-hunt-kit-{''.join(c for c in session_id if c.isalnum() or c == '-')}"
+    try:
+        os.close(os.open(stamp, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
+        return True
+    except FileExistsError:
+        # A stamp older than a few seconds is from an earlier start (e.g. a resume); speak again.
+        if time.time() - stamp.stat().st_mtime > STAMP_SECONDS:
+            stamp.touch()
+            return True
+        return False
+    except OSError:
+        return True
+
+
+def hook(stdin: str, today: date, stamp_dir: Path | None = None) -> str:
     """Session-start reminder. Silent unless the session's folder has a log with something due."""
     try:
         # Windows PowerShell puts a byte-order mark in front of text it pipes in.
-        log = Path(json.loads(stdin.lstrip("﻿") or "{}").get("cwd") or ".") / LOG_NAME
+        payload = json.loads(stdin.lstrip("﻿") or "{}")
+        log = Path(payload.get("cwd") or ".") / LOG_NAME
         if not log.is_file():
             return ""
         _, rows = read_log(log)
@@ -176,6 +198,9 @@ def hook(stdin: str, today: date) -> str:
         return ""
     pending = due(rows, today)
     if not pending:
+        return ""
+    session_id = str(payload.get("session_id") or "")
+    if session_id and not first_to_speak(session_id, stamp_dir or Path(tempfile.gettempdir())):
         return ""
     lines = [describe(r, today) for r in pending]
     summary = f"{len(pending)} job application(s) in {LOG_NAME} are due a follow-up"

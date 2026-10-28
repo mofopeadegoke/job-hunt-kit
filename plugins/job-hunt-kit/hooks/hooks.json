@@ -1,0 +1,24 @@
+{
+  "description": "Remind the user of job applications due a follow-up when a session opens in a folder with applications.csv. Python is started directly under both common names (no shell needed); on most machines one name fails harmlessly, and where both work the script lets only the first speak.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/skills/track/scripts/track.py", "hook"],
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/skills/track/scripts/track.py", "hook"],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

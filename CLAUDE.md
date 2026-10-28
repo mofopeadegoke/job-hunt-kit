@@ -70,7 +70,7 @@ job-hunt-kit/
         scripts/extract_text.py             ← compile (if LaTeX exists) + pdftotext; .py so it runs on Windows
       track/
         SKILL.md                            ← application log, interview rate, follow-ups
-    hooks/                                  ← follow-up reminder at session start (later)
+    hooks/hooks.json                        ← session-start follow-up reminder (runs track.py hook)
     evals/                                  ← claude plugin eval suite
   research/                                 ← findings and result CSVs (raw resumes are private)
   fixtures/                                 ← Jane Doe profile, fictional job postings, answer key
@@ -92,6 +92,14 @@ continues if the user already said to go ahead) → parse check → title (R8)
 (layout + line-by-line truth audit) → `report.md` citing fact IDs.
 
 Deterministic checks go in scripts (reliable, testable); wording and judgment stay with Claude.
+
+### `track` and the hook
+`track.py` owns the log (ids, follow-up = applied + 3 days, due list, rates); SKILL.md always
+calls it. The SessionStart hook uses exec form (`command` + `args`, no shell): Claude Code here
+can't find Git Bash (installed under `AppData\Local\Programs\Git`), so `"shell": "bash"` hooks
+fail. It starts `python3` and `python` both, since either may be the real one (Windows'
+`python3` is often a Store stub); a per-session stamp file lets only the first speak. Test with
+`claude -p ... --plugin-dir plugins/job-hunt-kit --debug --debug-file <log>`.
 
 ### Evals (`plugins/job-hunt-kit/evals/`)
 - Run: `claude plugin eval plugins/job-hunt-kit --scaffold --allow-tools Write Edit --no-publish`
