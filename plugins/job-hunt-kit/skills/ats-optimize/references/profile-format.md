@@ -4,7 +4,7 @@ A profile is a folder the user keeps outside the plugin, e.g. `~/job-hunt/`. It 
 
 | File | What it is | Who writes it |
 | --- | --- | --- |
-| `resume.tex` | The master resume in LaTeX. The starting point for every tailored version. | The user |
+| `resume.tex` | The master resume in LaTeX. The starting point for every tailored version. | The user, or the skill converting their PDF or Word resume once ([convert.md](convert.md)), which the user confirms |
 | `facts.md` | Every confirmed fact the skill may use, plus a "Never claim" list. The source of truth. | The user (the skill may help draft it, the user confirms it) |
 
 `resume.tex` is how the facts are presented. `facts.md` is what is true. When they disagree,

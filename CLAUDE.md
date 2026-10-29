@@ -80,7 +80,9 @@ job-hunt-kit/
 ```
 
 ### Profile format (lives OUTSIDE the plugin, in the user's own folder)
-- `resume.tex` — the master resume (LaTeX for v1)
+- `resume.tex` — the master resume. Users with only a PDF/Word resume get one converted
+  (`references/convert.md`): extract → fill the template → `compare_text.py` (same words and
+  links) → the user confirms the converted resume and drafted `facts.md` once → tailoring.
 - `facts.md` — confirmed facts the skills may use: titles, dates, numbers with their exact
   wording, and a **"never claim"** list (things the user has NOT done)
 - Later: `applications.csv` for the `track` skill (schema in `research/applications-README.md`)

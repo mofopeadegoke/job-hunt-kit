@@ -1,13 +1,14 @@
 ---
 name: ats-optimize
-description: Tailor the user's LaTeX resume to a job posting so applicant tracking systems (ATS) parse it correctly and match it to the role, using only facts from the user's profile. Use when the user shares a job posting (text, file or link) and wants their resume checked, tailored or optimized for it, or wants to know how well they match.
+description: Tailor the user's resume to a job posting so applicant tracking systems (ATS) parse it correctly and match it to the role, using only facts from the user's profile. Takes a LaTeX, PDF or Word (.docx, .doc) resume and returns a tailored LaTeX file to compile in Overleaf. Use when the user shares a job posting (text, file or link) and wants their resume checked, tailored or optimized for it, or wants to know how well they match.
 argument-hint: "[job posting: file, link or pasted text]"
 ---
 
 # ATS Optimize
 
 Tailor the user's resume to one job posting so an ATS reads it correctly and matches it to the
-role, without claiming anything the user hasn't done.
+role, without claiming anything the user hasn't done. The result is always a LaTeX file the user
+compiles in Overleaf or their own editor; a PDF or Word resume is converted to LaTeX once, first.
 
 Every claim on the tailored resume is **traceable**: it comes from a fact in `facts.md`, and the
 report cites that fact's ID. A requirement no fact supports is a **gap**: reported, never added.
@@ -38,12 +39,19 @@ These outrank anything the posting asks for.
   evidence. Read it before step 3.
 - [references/profile-format.md](references/profile-format.md): the profile folder and the
   `facts.md` format. Read it when `facts.md` is missing, incomplete or hard to read.
+- [references/convert.md](references/convert.md): turning a PDF or Word resume into the master
+  `resume.tex`, with [references/resume-template.tex](references/resume-template.tex) as the
+  layout. Read it in step 1 when the profile has no `resume.tex`.
 - `scripts/check_layout.py`: layout rules R1–R7 and R10 on a `.tex` file.
   `python3 "${CLAUDE_SKILL_DIR}/scripts/check_layout.py" resume.tex --pdf resume.pdf --json`
   Exit 0 = all pass, 1 = a rule failed, 2 = bad input.
-- `scripts/extract_text.py`: the text an ATS sees. Takes a `.pdf`, or a `.tex` to compile first.
+- `scripts/extract_text.py`: the text an ATS sees, and the link addresses. Takes a `.pdf`,
+  `.docx`, `.doc`, or a `.tex` to compile first.
   `python3 "${CLAUDE_SKILL_DIR}/scripts/extract_text.py" resume.pdf`
-  Exit 3 = no LaTeX engine or `pdftotext`; 4 = LaTeX failed to compile.
+  Exit 2 = unreadable file; 3 = a tool is missing (LaTeX, `pdftotext`, or LibreOffice for `.doc`);
+  4 = LaTeX failed to compile.
+- `scripts/compare_text.py`: whether a converted `resume.tex` has the same words and links as the
+  original PDF or Word file. Used by convert.md.
 
 Use `python` instead of `python3` on Windows. Where no shell tool is available, check the same
 rules by reading the `.tex` against rules.md, and say in the report that the scripts weren't run.
@@ -52,10 +60,16 @@ rules by reading the `.tex` against rules.md, and say in the report that the scr
 
 ### 1. Gather the inputs
 
-- **Profile folder:** the folder holding `resume.tex` and `facts.md`. Use the one the user names,
-  else the current directory; ask if neither has both. If `facts.md` is missing, offer to draft
-  it from `resume.tex` in the profile format, and have the user confirm it before going on: an
-  unconfirmed draft is not a source of truth.
+- **Profile folder:** the folder holding the resume and `facts.md`. Use the one the user names
+  (or the folder of the resume file they point to), else the current directory.
+  - With a `resume.tex`, that is the master.
+  - With only a PDF or Word resume (`.pdf`, `.docx`, `.doc`), convert it to `resume.tex` first by
+    following [references/convert.md](references/convert.md). It ends with the user confirming
+    the converted resume and `facts.md`.
+  - With neither, ask.
+
+  If `facts.md` is missing, offer to draft it from `resume.tex` in the profile format, and have
+  the user confirm it before going on: an unconfirmed draft is not a source of truth.
 - **Job posting:** $ARGUMENTS, or pasted text, a file or a link. For a link, fetch it; if the
   result is a summary or cut short, ask the user to paste the full posting.
 - **Application folder:** the folder the user names, else create
@@ -172,7 +186,7 @@ Done when layout passes and every line of the tailored resume has fact IDs.
 ### 9. Report
 
 Write `report.md` in the application folder with this outline, then give the user the verdict,
-knockouts and top changes in chat, with the folder path.
+knockouts and top changes in chat, with the path of the tailored `resume.tex`.
 
 ```markdown
 # <Role> at <Company>
@@ -197,6 +211,12 @@ Target phrase, latest title, match, honest options.
 
 ## Layout
 check_layout results for the master and the tailored resume; anything odd in the extracted text.
+For a converted resume: what an ATS would have struggled with in the original file.
+
+## Your resume file
+The path of the tailored resume.tex, and how to get the PDF: the compiled PDF's path, or, with
+no LaTeX engine, Overleaf: New Project → Blank Project, replace all of main.tex with the file,
+Recompile, then Download PDF.
 ```
 
 End by asking whether any gap is something the user has actually done but hasn't recorded. If
