@@ -85,6 +85,24 @@ def extract_text(pdf: Path) -> str:
     ).stdout
 
 
+def pdf_links(pdf: Path) -> list[str]:
+    # Link addresses live in annotations, not in the text; "pdfinfo -url" needs Poppler 21+.
+    if not shutil.which("pdfinfo"):
+        return []
+    out = subprocess.run(["pdfinfo", "-url", str(pdf)], capture_output=True, text=True, errors="replace").stdout
+    return list(dict.fromkeys(re.findall(r"^\s*\d+\s+\S+\s+(\S+)\s*$", out, re.MULTILINE)))
+
+
+def docx_links(path: Path) -> list[str]:
+    with zipfile.ZipFile(path) as docx:
+        found = []
+        for rels in sorted(n for n in docx.namelist() if re.fullmatch(r"word/_rels/[^/]+\.xml\.rels", n)):
+            for r in ElementTree.fromstring(docx.read(rels)).iter(RELS):
+                if r.get("TargetMode") == "External" and r.get("Type", "").endswith("/hyperlink"):
+                    found.append(r.get("Target"))
+    return list(dict.fromkeys(found))
+
+
 def link_targets(docx: zipfile.ZipFile, part: str) -> dict[str, str]:
     rels = f"{part.rsplit('/', 1)[0]}/_rels/{part.rsplit('/', 1)[1]}.rels"
     if rels not in docx.namelist():
@@ -175,14 +193,14 @@ def convert_doc(doc: Path, out_dir: Path) -> Path:
 
 def read_resume(path: Path) -> dict:
     suffix = path.suffix.lower()
-    if suffix == ".docx":
-        return {"source": str(path), "pdf": None, "pages": None, "text": extract_docx(path)}
-    if suffix == ".doc":
+    if suffix in (".docx", ".doc"):
         with tempfile.TemporaryDirectory() as tmp:
-            return {"source": str(path), "pdf": None, "pages": None,
-                    "text": extract_docx(convert_doc(path, Path(tmp)))}
+            docx = path if suffix == ".docx" else convert_doc(path, Path(tmp))
+            text = extract_docx(docx)
+            return {"source": str(path), "pdf": None, "pages": None, "text": text, "links": docx_links(docx)}
     pdf = compile_tex(path) if suffix == ".tex" else path
-    return {"source": str(path), "pdf": str(pdf), "pages": page_count(pdf), "text": extract_text(pdf)}
+    return {"source": str(path), "pdf": str(pdf), "pages": page_count(pdf),
+            "text": extract_text(pdf), "links": pdf_links(pdf)}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -216,7 +234,8 @@ def main(argv: list[str] | None = None) -> int:
             sys.stdout.reconfigure(errors="replace")
         pages = result["pages"]
         print(f"source: {result['source']}\npdf: {result['pdf'] or 'n/a'}\n"
-              f"pages: {pages if pages is not None else 'unknown'}\n")
+              f"pages: {pages if pages is not None else 'unknown'}\n"
+              f"links: {', '.join(result['links']) or 'none found'}\n")
         print(result["text"])
     return 0
 

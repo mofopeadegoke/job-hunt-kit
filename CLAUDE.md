@@ -69,6 +69,7 @@ job-hunt-kit/
         references/resume-template.tex      ← Jane's layout with {{placeholders}}; PDF/Word resumes are converted into it
         scripts/check_layout.py             ← deterministic checks on a .tex file
         scripts/extract_text.py             ← compile (if LaTeX exists) + pdftotext; .py so it runs on Windows
+        scripts/compare_text.py             ← converted .tex vs original PDF/Word: same words and links, nothing added
       track/
         SKILL.md                            ← application log, interview rate, follow-ups
     hooks/hooks.json                        ← session-start follow-up reminder (runs track.py hook)
