@@ -232,5 +232,8 @@ no LaTeX engine, Overleaf: New Project → Blank Project, replace all of main.te
 Recompile, then Download PDF.
 ```
 
+The report is for the user: describe each rule by what it does ("ATS searches use your latest job
+title"), never by its code (R1–R10).
+
 End by asking whether anything Missing is something the user has actually done but hasn't
 recorded. If so, they add it to `facts.md` first, then rerun.
