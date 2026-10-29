@@ -70,6 +70,7 @@ job-hunt-kit/
         scripts/check_layout.py             ← deterministic checks on a .tex file
         scripts/extract_text.py             ← compile (if LaTeX exists) + pdftotext; .py so it runs on Windows
         scripts/compare_text.py             ← converted .tex vs original PDF/Word: same words and links, nothing added
+        scripts/render_report.py            ← report.md → styled report.html (stdlib only); status labels in Status columns
       track/
         SKILL.md                            ← application log, interview rate, follow-ups
     hooks/hooks.json                        ← session-start follow-up reminder (runs track.py hook)
@@ -92,7 +93,7 @@ The source of truth is `SKILL.md` (9 steps). In short: gather inputs → **knock
 (a failed eligibility knockout, like visa, location, time zone or language, is a hard stop:
 report and ask before tailoring; a years/seniority shortfall is reported plainly, and tailoring
 continues if the user already said to go ahead) → parse check → title (R8)
-→ placement (R9) → keyword match (present / reword / move up / partial / gap) → write → verify
+→ placement (R9) → keyword match (On resume / Reworded / Moved higher / Added from facts / Partial match / Missing) → write → verify
 (layout + line-by-line truth audit) → `report.md` citing fact IDs.
 
 Deterministic checks go in scripts (reliable, testable); wording and judgment stay with Claude.

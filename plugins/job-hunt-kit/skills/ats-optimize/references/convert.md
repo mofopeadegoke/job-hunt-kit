@@ -52,7 +52,7 @@ Done when compare_text exits 0 (or only lists the allowed leftovers) and check_l
 If the profile has no `facts.md`, draft one from the converted `resume.tex` in the
 [profile format](profile-format.md). Copy facts from the resume only. About fields the resume
 doesn't state (citizenship, work authorization, time zone) and the "Never claim" list come from
-the user: write them as questions in the draft.
+the user: mark them `(to confirm)` in the draft and ask for them in step 5.
 
 ## 5. Confirm with the user
 
@@ -63,9 +63,12 @@ This is the one stop before tailoring. In one message, give:
 - the layout changes they will notice (for example: contact details moved out of the page
   header, the skills table turned into lines);
 - how to see it: paste it into a blank Overleaf project and click Recompile;
-- the `facts.md` draft, with its questions.
+- the path of the `facts.md` draft;
+- your questions, numbered, in the reply itself: every `(to confirm)` item and anything unclear.
+  The user answers here in the chat; you write the answers into `facts.md`.
 
-Ask them to confirm both files or say what to correct. Write nothing else until they answer.
+Ask them to answer the questions and confirm both files or say what to correct. Write nothing
+else until they answer.
 After a correction, re-run compare_text: the only differences left must be the ones the user
 asked for.
 

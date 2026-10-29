@@ -75,6 +75,6 @@ the job description asks for.
 - **May not:** add a skill, tool, number, title, date, responsibility or result that isn't in
   `facts.md`; strengthen a verb or a number; change an `employer` title; use anything on the
   "Never claim" list.
-- If a job requires something the profile doesn't support, it is reported as a **gap**, never
+- If a job requires something the profile doesn't support, it is reported as **Missing**, never
   added.
 - If `facts.md` is missing or doesn't cover something on the resume, ask the user. Don't guess.

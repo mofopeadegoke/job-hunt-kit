@@ -11,7 +11,7 @@ role, without claiming anything the user hasn't done. The result is always a LaT
 compiles in Overleaf or their own editor; a PDF or Word resume is converted to LaTeX once, first.
 
 Every claim on the tailored resume is **traceable**: it comes from a fact in `facts.md`, and the
-report cites that fact's ID. A requirement no fact supports is a **gap**: reported, never added.
+report cites that fact's ID. A requirement no fact supports is **Missing**: reported, never added.
 
 ## Truthfulness guardrails
 
@@ -30,7 +30,7 @@ These outrank anything the posting asks for.
   the alternatives listed for it.
 - Leave everything on the "Never claim" list out of the resume, summary and skills.
 - When the posting's term is broader or stronger than the fact (fact: "component library", job:
-  "design system"), keep the fact's term and mark the requirement **partial**.
+  "design system"), keep the fact's term and mark the requirement **Partial match**.
 - When a fact is missing or unclear, ask the user.
 
 ## Files
@@ -52,6 +52,8 @@ These outrank anything the posting asks for.
   4 = LaTeX failed to compile.
 - `scripts/compare_text.py`: whether a converted `resume.tex` has the same words and links as the
   original PDF or Word file. Used by convert.md.
+- `scripts/render_report.py`: turns `report.md` into `report.html`, a styled page for any browser.
+  `python3 "${CLAUDE_SKILL_DIR}/scripts/render_report.py" report.md`
 
 Use `python` instead of `python3` on Windows. Where no shell tool is available, check the same
 rules by reading the `.tex` against rules.md, and say in the report that the scripts weren't run.
@@ -69,7 +71,8 @@ rules by reading the `.tex` against rules.md, and say in the report that the scr
   - With neither, ask.
 
   If `facts.md` is missing, offer to draft it from `resume.tex` in the profile format, and have
-  the user confirm it before going on: an unconfirmed draft is not a source of truth.
+  the user confirm it before going on: an unconfirmed draft is not a source of truth. Ask what
+  the resume doesn't say as numbered questions in your reply, and write the answers into the file.
 - **Job posting:** $ARGUMENTS, or pasted text, a file or a link. For a link, fetch it; if the
   result is a summary or cut short, ask the user to paste the full posting.
 - **Application folder:** the folder the user names, else create
@@ -154,14 +157,16 @@ options (or "none").
 List every requirement in the posting (tools, practices, domains, responsibilities), marked
 required or nice-to-have, and give each one status:
 
-- **present:** on the master resume already, in the posting's words.
-- **reword:** a fact supports it under another name; use the posting's term for the same thing
+- **On resume:** on the master resume already, in the posting's words.
+- **Reworded:** a fact supports it under another name; use the posting's term for the same thing
   ("end-to-end tests" for Playwright tests, "Postgres" for PostgreSQL).
-- **move up:** a fact supports it, but it is buried or only in `facts.md`; bring it in or higher.
-- **partial:** the fact is narrower or weaker than the requirement; keep the fact's wording.
-- **gap:** no fact supports it; stays off the resume.
+- **Moved higher:** on the master resume but easy to miss; bring it higher.
+- **Added from facts:** a fact in `facts.md` supports it but the master resume leaves it out;
+  bring it in.
+- **Partial match:** the fact is narrower or weaker than the requirement; keep the fact's wording.
+- **Missing:** no fact supports it; stays off the resume.
 
-Done when every requirement has a status and every non-gap has fact IDs.
+Done when every requirement has a status and every one except Missing has fact IDs.
 
 ### 7. Write the tailored resume
 
@@ -185,8 +190,9 @@ Done when layout passes and every line of the tailored resume has fact IDs.
 
 ### 9. Report
 
-Write `report.md` in the application folder with this outline, then give the user the verdict,
-knockouts and top changes in chat, with the path of the tailored `resume.tex`.
+Write `report.md` in the application folder with this outline and run `render_report.py` on it.
+Then give the user the verdict, knockouts and top changes in chat, with the paths of the tailored
+`resume.tex` and of `report.html` (to open in a browser).
 
 ```markdown
 # <Role> at <Company>
@@ -197,16 +203,23 @@ Two sentences: how strong the match is, and the biggest risk.
 ## Knockouts
 | Requirement | Profile says | Status |
 
-## Title (R8)
-Target phrase, latest title, match, honest options.
+## Title
+The job's title phrase, your latest job title, whether it matches (ATS searches use the latest
+title), and the honest options.
 
 ## Requirements
-| Requirement | Required / nice | Status | Fact IDs | Change made |
+| Requirement | Required / nice | Status | Change made |
+
+What the statuses mean: **On resume**: already there, in the job's words. **Reworded**: you have
+it; now described with the job's term. **Moved higher**: on your resume but easy to miss; now
+near the top. **Added from facts**: true and in your facts.md, now on the resume. **Partial
+match**: you have something related but less than asked; your wording is kept. **Missing**:
+nothing you've done supports it, so it isn't on the resume.
 
 ## Changes
 - <change> (<fact IDs>)
 
-## Gaps
+## Missing
 <requirement>: not on the resume because no fact supports it.
 
 ## Layout
@@ -219,5 +232,5 @@ no LaTeX engine, Overleaf: New Project → Blank Project, replace all of main.te
 Recompile, then Download PDF.
 ```
 
-End by asking whether any gap is something the user has actually done but hasn't recorded. If
-so, they add it to `facts.md` first, then rerun.
+End by asking whether anything Missing is something the user has actually done but hasn't
+recorded. If so, they add it to `facts.md` first, then rerun.

@@ -15,7 +15,7 @@ interview rate really is.
 
 | Skill | Ask Claude things like | What you get |
 | --- | --- | --- |
-| **`ats-optimize`** | "Tailor my resume for this job: <link or pasted posting>" | A folder for the application with the tailored `resume.tex` and a `report.md`: knockouts, title and placement changes, every requirement marked present / reworded / moved up / partial / gap, and the fact behind each change |
+| **`ats-optimize`** | "Tailor my resume for this job: <link or pasted posting>" | A folder for the application with the tailored `resume.tex` and a report (`report.html` for your browser): knockouts, title and placement changes, every requirement marked On resume / Reworded / Moved higher / Added from facts / Partial match / Missing, and the fact behind each change |
 | **`track`** | "I applied to Pollen today, log it" · "They called me for a screen" · "Who should I follow up with?" · "What's my interview rate?" | An `applications.csv` log, follow-ups due 3 days after applying, short follow-up notes, and honest stats |
 
 A **session-start reminder** tells you when follow-ups are due whenever you open Claude Code in the
