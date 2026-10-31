@@ -181,7 +181,7 @@ def hook(stdin: str, today: date) -> str:
     lines = [describe(r, today) for r in pending]
     summary = f"{len(pending)} job application(s) in {LOG_NAME} are due a follow-up"
     return json.dumps({
-        "systemMessage": f"Job Hunt Kit: {summary}. Ask Claude to show them.",
+        "systemMessage": f"Uncooked: {summary}. Ask Claude to show them.",
         "hookSpecificOutput": {
             "hookEventName": "SessionStart",
             "additionalContext": f"{summary} (no reply yet, follow-up date passed):\n" + "\n".join(lines),

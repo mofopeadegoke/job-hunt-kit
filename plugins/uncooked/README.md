@@ -1,8 +1,8 @@
-# Job Hunt Kit
+# Uncooked
 
 Helps you get more interviews **without exaggerating anything**.
 
-Job Hunt Kit finds the true things you've already done and puts them where applicant tracking
+Uncooked finds the true things you've already done and puts them where applicant tracking
 systems (ATS) and recruiters will see them. If you don't have something a job asks for, it says so.
 
 It takes a LaTeX, PDF or Word resume and gives you back a tailored LaTeX file to turn into a PDF in
@@ -14,7 +14,7 @@ follow up with and what your interview rate really is.
 In Claude Code (v2.1.275 or later):
 
 ```
-/plugin install job-hunt-kit --marketplace mofopeadegoke/job-hunt-kit
+/plugin install uncooked --marketplace mofopeadegoke/uncooked
 ```
 
 ## What's inside
@@ -68,7 +68,7 @@ results changed what recruiters could see:
 - **A stacked Education block.** GPA was extracted only when each detail had its own line.
 
 The full write-up is in the
-[research findings](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/research/findings.md).
+[research findings](https://github.com/mofopeadegoke/uncooked/blob/main/research/findings.md).
 
 ## Does it work?
 
@@ -76,7 +76,7 @@ The plugin is tested with 11 eval cases: fictional candidate, fictional postings
 files produced and the reply. Against plain Claude with the same resume and posting (Claude
 Sonnet, 3 runs each, identical checks):
 
-| Job | With Job Hunt Kit | Plain Claude |
+| Job | With Uncooked | Plain Claude |
 | --- | --- | --- |
 | Good match | **0.96** | 0.50 |
 | Stretch AI role | **0.95** | 0.50 |
@@ -88,12 +88,12 @@ Projects, and never warned about the shortfall.
 ## Try it
 
 These examples use the fictional candidate Jane Doe. Her files are in the
-[`fixtures` folder](https://github.com/mofopeadegoke/job-hunt-kit/tree/main/fixtures) of the
+[`fixtures` folder](https://github.com/mofopeadegoke/uncooked/tree/main/fixtures) of the
 GitHub repository. Put them in an empty folder and open Claude Code there.
 
 **1. Convert a PDF resume.** Copy
-[`jane-doe/word/resume.pdf`](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/fixtures/jane-doe/word/resume.pdf)
-and [`jobs/01-pollen-frontend-engineer.txt`](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/fixtures/jobs/01-pollen-frontend-engineer.txt)
+[`jane-doe/word/resume.pdf`](https://github.com/mofopeadegoke/uncooked/blob/main/fixtures/jane-doe/word/resume.pdf)
+and [`jobs/01-pollen-frontend-engineer.txt`](https://github.com/mofopeadegoke/uncooked/blob/main/fixtures/jobs/01-pollen-frontend-engineer.txt)
 (saved as `job-posting.txt`), then say:
 
 > I'm applying for the job in job-posting.txt. Can you tailor my resume for it? All I have is
@@ -103,9 +103,9 @@ Claude writes `resume.tex` with the same words as the PDF, drafts `facts.md`, as
 in the chat and stops before tailoring.
 
 **2. Tailor a resume and see a knockout.** Copy
-[`jane-doe/resume.tex`](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/fixtures/jane-doe/resume.tex),
-[`jane-doe/facts.md`](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/fixtures/jane-doe/facts.md)
-and [`jobs/03-kranich-senior-frontend-berlin.txt`](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/fixtures/jobs/03-kranich-senior-frontend-berlin.txt)
+[`jane-doe/resume.tex`](https://github.com/mofopeadegoke/uncooked/blob/main/fixtures/jane-doe/resume.tex),
+[`jane-doe/facts.md`](https://github.com/mofopeadegoke/uncooked/blob/main/fixtures/jane-doe/facts.md)
+and [`jobs/03-kranich-senior-frontend-berlin.txt`](https://github.com/mofopeadegoke/uncooked/blob/main/fixtures/jobs/03-kranich-senior-frontend-berlin.txt)
 (saved as `job-posting.txt`), then say:
 
 > Tailor my resume for the job in job-posting.txt.
@@ -158,7 +158,7 @@ time you open Claude Code in that folder, the reminder appears.
   plugin has no server and no analytics.
 
 Overleaf is optional, and you choose whether to paste your resume there. Full details:
-[privacy policy](https://github.com/mofopeadegoke/job-hunt-kit/blob/main/plugins/job-hunt-kit/PRIVACY.md).
+[privacy policy](https://github.com/mofopeadegoke/uncooked/blob/main/plugins/uncooked/PRIVACY.md).
 
 ## Troubleshooting
 
@@ -170,7 +170,7 @@ Overleaf is optional, and you choose whether to paste your resume there. Full de
 
 ## Support
 
-Report problems at [GitHub Issues](https://github.com/mofopeadegoke/job-hunt-kit/issues).
+Report problems at [GitHub Issues](https://github.com/mofopeadegoke/uncooked/issues).
 
 ## License
 

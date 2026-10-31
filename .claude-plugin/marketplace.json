@@ -1,13 +1,13 @@
 {
-  "name": "job-hunt-kit",
+  "name": "uncooked",
   "description": "Honest job-search tools for Claude Code",
   "owner": {
     "name": "Adegoke Mofopefoluwa Daniel"
   },
   "plugins": [
     {
-      "name": "job-hunt-kit",
-      "source": "./plugins/job-hunt-kit",
+      "name": "uncooked",
+      "source": "./plugins/uncooked",
       "description": "Tailor a resume (LaTeX, PDF or Word) to a job posting for ATS parsers without adding anything untrue, get a LaTeX file back for Overleaf, and track applications."
     }
   ]

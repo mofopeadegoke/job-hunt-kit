@@ -1,4 +1,4 @@
-# Job Hunt Kit
+# Uncooked
 
 A Claude Code plugin that helps you get more interviews **without exaggerating anything**.
 
@@ -9,11 +9,11 @@ a job is a long shot. And it keeps your application log, so you know who to foll
 what your interview rate really is.
 
 ```
-/plugin install job-hunt-kit --marketplace mofopeadegoke/job-hunt-kit
+/plugin install uncooked --marketplace mofopeadegoke/uncooked
 ```
 
 Example prompts to try, with sample files, are in the
-[plugin README](plugins/job-hunt-kit/README.md#try-it).
+[plugin README](plugins/uncooked/README.md#try-it).
 
 ## What's inside
 
@@ -47,17 +47,17 @@ These beat anything a job posting asks for:
 In Claude Code (v2.1.275 or later):
 
 ```
-/plugin install job-hunt-kit --marketplace mofopeadegoke/job-hunt-kit
+/plugin install uncooked --marketplace mofopeadegoke/uncooked
 ```
 
 Or from your shell:
 
 ```
-claude plugin marketplace add mofopeadegoke/job-hunt-kit
-claude plugin install job-hunt-kit@job-hunt-kit
+claude plugin marketplace add mofopeadegoke/uncooked
+claude plugin install uncooked@uncooked
 ```
 
-Update later with `claude plugin update job-hunt-kit@job-hunt-kit`.
+Update later with `claude plugin update uncooked@uncooked`.
 
 **Needs:** Python 3 (for the scripts and the reminder).
 
@@ -83,7 +83,7 @@ the `poppler-utils` package.
      same words in an ATS-safe layout) and drafts `facts.md`: everything true about you that a
      resume may use, each fact with an ID, plus a **Never claim** list of things you haven't done.
      It asks you a few questions in the chat. Check both files and answer; this happens once.
-     See [the profile format](plugins/job-hunt-kit/skills/ats-optimize/references/profile-format.md)
+     See [the profile format](plugins/uncooked/skills/ats-optimize/references/profile-format.md)
      and the [Jane Doe example](fixtures/jane-doe/facts.md).
    - **Every job after that,** you get a folder `applications/<date>-<company>-<role>/` with the
      tailored `resume.tex` and `report.html` (open it in your browser). Your master resume is
@@ -114,14 +114,14 @@ around contact separators, visible space between entries, one page, hyphenation 
 
 ## Does it work? Evals
 
-The plugin ships with an eval suite (`plugins/job-hunt-kit/evals/`, run with `claude plugin eval`):
+The plugin ships with an eval suite (`plugins/uncooked/evals/`, run with `claude plugin eval`):
 11 cases with fictional candidate Jane Doe and fictional job postings, each scored by regex checks
 on the files produced and by an LLM judge on the reply.
 
 **Plugin vs plain Claude** (Claude Sonnet, 3 runs each, identical checks; plain Claude gets the
 same resume and posting):
 
-| Job | With Job Hunt Kit | Plain Claude |
+| Job | With Uncooked | Plain Claude |
 | --- | --- | --- |
 | Good match (Pollen) | **0.96** | 0.50 |
 | Stretch AI role (Relay) | **0.95** | 0.50 |
@@ -140,7 +140,7 @@ without asking.
 
 Your resume and facts are sent nowhere except to Claude itself, as part of your normal Claude
 session. The plugin has no server and no analytics. Your profile and application log stay in your
-own folder. Full details: [privacy policy](plugins/job-hunt-kit/PRIVACY.md).
+own folder. Full details: [privacy policy](plugins/uncooked/PRIVACY.md).
 
 ## Where it works
 
@@ -153,8 +153,8 @@ own folder. Full details: [privacy policy](plugins/job-hunt-kit/PRIVACY.md).
 
 ```
 python -m unittest discover tests            # 103 unit tests for the scripts
-claude plugin eval plugins/job-hunt-kit --scaffold --allow-tools Write Edit --model sonnet --judge-model sonnet
-claude plugin validate --strict plugins/job-hunt-kit
+claude plugin eval plugins/uncooked --scaffold --allow-tools Write Edit --model sonnet --judge-model sonnet
+claude plugin validate --strict plugins/uncooked
 ```
 
 Test fixtures use the fictional Jane Doe; no real personal data is in this repository.

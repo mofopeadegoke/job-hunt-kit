@@ -1,4 +1,4 @@
-# Job Hunt Kit — project context
+# Uncooked — project context
 
 Week 2 project of a 12-week self-directed sprint. Daniel is a frontend engineer (React,
 TypeScript, React Native, Next.js) building full-stack and AI engineering skills. The goal is
@@ -57,9 +57,9 @@ problems, not resume problems: never "fix" a resume for them.
 ## Plugin design
 
 ```
-job-hunt-kit/
+uncooked/
   .claude-plugin/marketplace.json          ← the catalog (one plugin for now; Ship Kit later)
-  plugins/job-hunt-kit/
+  plugins/uncooked/
     .claude-plugin/plugin.json
     skills/
       ats-optimize/
@@ -107,10 +107,10 @@ the setting on Windows; check in step 7) `Set-Alias` is an unknown command and `
 Hooks can't be marked "allowed to fail": every failing hook shows a "SessionStart hook error",
 so two hooks (python3 + python) showed one error on every machine. Claude Code here can't find
 Git Bash (under `AppData\Local\Programs\Git`), so bash-only hooks fail. Test with
-`claude -p ... --plugin-dir plugins/job-hunt-kit --debug --debug-file <log>`.
+`claude -p ... --plugin-dir plugins/uncooked --debug --debug-file <log>`.
 
-### Evals (`plugins/job-hunt-kit/evals/`)
-- Run: `claude plugin eval plugins/job-hunt-kit --scaffold --allow-tools Write Edit --no-publish`
+### Evals (`plugins/uncooked/evals/`)
+- Run: `claude plugin eval plugins/uncooked --scaffold --allow-tools Write Edit --no-publish`
   (add `--model haiku` for cheap iteration, `--judge-model sonnet` because a Haiku judge misgrades).
 - No Bash in cases: native Windows has no sandbox, so granting Bash refuses every run. The skill
   falls back to checking rules by reading the `.tex`.
@@ -153,11 +153,11 @@ Git Bash (under `AppData\Local\Programs\Git`), so bash-only hooks fail. Test wit
 7. **Publish** (v1.0.0). 7a done: README, LICENSE, plugin.json homepage/repository, privacy pass
    over all git history (clean). 7c done: pushed to GitHub. PDF/Word conversion has its own eval
    case, `pdf-convert`. Your-own-marketplace install tested fresh on Windows. Directory
-   prep: `plugins/job-hunt-kit/README.md` and `PRIVACY.md` added; the install-time trust warning
+   prep: `plugins/uncooked/README.md` and `PRIVACY.md` added; the install-time trust warning
    reads the same for every marketplace, so a listing won't remove it. Left: 7b icon (square PNG 512–2048 px, `.claude-plugin/icon.png`;
    the first one submitted is permanent), 7d fresh install (+ a Mac check of the hook),
    7e claude.ai upload, 7f directory submission (claude.ai/directory/manage; `claude plugin
-   validate --strict --profile directory plugins/job-hunt-kit` must pass), 7g demo GIF + write-up.
+   validate --strict --profile directory plugins/uncooked` must pass), 7g demo GIF + write-up.
    Original notes: push to GitHub, install fresh from the marketplace like a stranger, README
    (what it does, honesty rules, research findings), demo GIF, write-up.
    **claude.ai version:** a packaging script builds a zip of `ats-optimize` from the same source,

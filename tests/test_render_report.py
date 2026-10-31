@@ -8,7 +8,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "plugins/job-hunt-kit/skills/ats-optimize/scripts/render_report.py"
+SCRIPT = ROOT / "plugins/uncooked/skills/ats-optimize/scripts/render_report.py"
 
 spec = importlib.util.spec_from_file_location("render_report", SCRIPT)
 render_report = importlib.util.module_from_spec(spec)

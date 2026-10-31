@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "plugins/job-hunt-kit/skills/track/scripts/track.py"
+SCRIPT = ROOT / "plugins/uncooked/skills/track/scripts/track.py"
 
 spec = importlib.util.spec_from_file_location("track", SCRIPT)
 track = importlib.util.module_from_spec(spec)

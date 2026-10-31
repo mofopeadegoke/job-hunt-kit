@@ -10,7 +10,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / "plugins/job-hunt-kit/skills/ats-optimize/scripts"
+SCRIPTS = ROOT / "plugins/uncooked/skills/ats-optimize/scripts"
 JANE_TEX_PATH = ROOT / "fixtures/jane-doe/resume.tex"
 JANE_TEX = JANE_TEX_PATH.read_text(encoding="utf-8")
 WORD = ROOT / "fixtures/jane-doe/word"

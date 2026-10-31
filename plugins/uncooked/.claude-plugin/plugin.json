@@ -1,13 +1,13 @@
 {
-  "name": "job-hunt-kit",
-  "displayName": "Job Hunt Kit",
+  "name": "uncooked",
+  "displayName": "Uncooked",
   "version": "1.0.0",
   "description": "Tailor a resume (LaTeX, PDF or Word) to a job posting for ATS parsers without adding anything untrue, get a LaTeX file back for Overleaf, and track applications.",
   "author": {
     "name": "Adegoke Mofopefoluwa Daniel"
   },
-  "homepage": "https://github.com/mofopeadegoke/job-hunt-kit",
-  "repository": "https://github.com/mofopeadegoke/job-hunt-kit",
+  "homepage": "https://github.com/mofopeadegoke/uncooked",
+  "repository": "https://github.com/mofopeadegoke/uncooked",
   "license": "MIT",
   "keywords": ["resume", "ats", "job-search", "latex", "pdf", "docx", "overleaf"]
 }

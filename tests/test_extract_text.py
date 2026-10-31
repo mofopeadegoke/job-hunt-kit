@@ -12,7 +12,7 @@ from pathlib import Path
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "plugins/job-hunt-kit/skills/ats-optimize/scripts/extract_text.py"
+SCRIPT = ROOT / "plugins/uncooked/skills/ats-optimize/scripts/extract_text.py"
 JANE_TEX = ROOT / "fixtures/jane-doe/resume.tex"
 JANE_PDF = ROOT / "fixtures/jane-doe/resume.pdf"
 JANE_WORD = ROOT / "fixtures/jane-doe/word"

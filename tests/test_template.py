@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "plugins/job-hunt-kit/skills/ats-optimize"
+SKILL = ROOT / "plugins/uncooked/skills/ats-optimize"
 TEMPLATE = (SKILL / "references/resume-template.tex").read_text(encoding="utf-8")
 JANE = (ROOT / "fixtures/jane-doe/resume.tex").read_text(encoding="utf-8")
 

@@ -1,8 +1,8 @@
-# Job Hunt Kit privacy policy
+# Uncooked privacy policy
 
 Last updated: 31 October 2026
 
-Job Hunt Kit is an open-source plugin for Claude. It helps you tailor a resume to a job posting and
+Uncooked is an open-source plugin for Claude. It helps you tailor a resume to a job posting and
 keep a log of your applications. This policy explains what data it uses and where that data goes.
 
 ## The short version
@@ -50,14 +50,14 @@ uninstall the plugin, or remove `applications.csv` from the folder.
 
 ## Children
 
-Job Hunt Kit is intended for adults looking for work, and is not intended for people under 18.
+Uncooked is intended for adults looking for work, and is not intended for people under 18.
 
 ## Changes
 
 Changes to this policy are recorded in the
-[project's GitHub history](https://github.com/mofopeadegoke/job-hunt-kit/commits/main/plugins/job-hunt-kit/PRIVACY.md).
+[project's GitHub history](https://github.com/mofopeadegoke/uncooked/commits/main/plugins/uncooked/PRIVACY.md).
 
 ## Contact
 
 Ask questions or report problems at
-[GitHub Issues](https://github.com/mofopeadegoke/job-hunt-kit/issues).
+[GitHub Issues](https://github.com/mofopeadegoke/uncooked/issues).
