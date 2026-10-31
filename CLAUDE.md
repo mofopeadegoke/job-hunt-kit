@@ -152,7 +152,9 @@ Git Bash (under `AppData\Local\Programs\Git`), so bash-only hooks fail. Test wit
    made the judge fail honest notes.)
 7. **Publish** (v1.0.0). 7a done: README, LICENSE, plugin.json homepage/repository, privacy pass
    over all git history (clean). 7c done: pushed to GitHub. PDF/Word conversion has its own eval
-   case, `pdf-convert`. Left: 7b icon (square PNG 512–2048 px, `.claude-plugin/icon.png`;
+   case, `pdf-convert`. Your-own-marketplace install tested fresh on Windows. Directory
+   prep: `plugins/job-hunt-kit/README.md` and `PRIVACY.md` added; the install-time trust warning
+   reads the same for every marketplace, so a listing won't remove it. Left: 7b icon (square PNG 512–2048 px, `.claude-plugin/icon.png`;
    the first one submitted is permanent), 7d fresh install (+ a Mac check of the hook),
    7e claude.ai upload, 7f directory submission (claude.ai/directory/manage; `claude plugin
    validate --strict --profile directory plugins/job-hunt-kit` must pass), 7g demo GIF + write-up.

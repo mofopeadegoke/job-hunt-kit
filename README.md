@@ -12,6 +12,9 @@ what your interview rate really is.
 /plugin install job-hunt-kit --marketplace mofopeadegoke/job-hunt-kit
 ```
 
+Example prompts to try, with sample files, are in the
+[plugin README](plugins/job-hunt-kit/README.md#try-it).
+
 ## What's inside
 
 | Skill | Ask Claude things like | What you get |
@@ -137,7 +140,7 @@ without asking.
 
 Your resume and facts are sent nowhere except to Claude itself, as part of your normal Claude
 session. The plugin has no server and no analytics. Your profile and application log stay in your
-own folder.
+own folder. Full details: [privacy policy](plugins/job-hunt-kit/PRIVACY.md).
 
 ## Where it works
 
