@@ -151,8 +151,9 @@ Git Bash (under `AppData\Local\Programs\Git`), so bash-only hooks fail. Test wit
    LLM graders for notes list every relevant fact and allow paraphrase: a partial fact list
    made the judge fail honest notes.)
 7. **Publish** (v1.0.0). 7a done: README, LICENSE, plugin.json homepage/repository, privacy pass
-   over all git history (clean). Left: 7b icon (square PNG 512–2048 px, `.claude-plugin/icon.png`;
-   the first one submitted is permanent), 7c push, 7d fresh install (+ a Mac check of the hook),
+   over all git history (clean). 7c done: pushed to GitHub. PDF/Word conversion has its own eval
+   case, `pdf-convert`. Left: 7b icon (square PNG 512–2048 px, `.claude-plugin/icon.png`;
+   the first one submitted is permanent), 7d fresh install (+ a Mac check of the hook),
    7e claude.ai upload, 7f directory submission (claude.ai/directory/manage; `claude plugin
    validate --strict --profile directory plugins/job-hunt-kit` must pass), 7g demo GIF + write-up.
    Original notes: push to GitHub, install fresh from the marketplace like a stranger, README

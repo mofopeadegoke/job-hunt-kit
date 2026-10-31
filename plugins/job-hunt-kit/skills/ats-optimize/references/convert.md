@@ -20,14 +20,19 @@ link addresses (including links shown only as a word, like "LinkedIn").
 - **Columns:** text from a two-column PDF can come out interleaved. Rebuild each entry by
   meaning; the word check in step 3 doesn't depend on order, and the user reviews order in step 5.
 - **No shell tool:** read a PDF with your file-reading tool. A `.docx` needs the script, so ask
-  for a PDF instead. Say in step 5 that the scripts weren't run.
+  for a PDF instead. Say in step 5 that the scripts weren't run. A link shown only as a word
+  ("GitHub") has an address you can't see this way: ask for it in step 5, never guess one, and
+  leave the word without a link until the user answers.
 
 Note what an ATS would have trouble with in the original (contact details in a page header or
 footer, tables, columns, icons, text in images): it goes in the report.
 
 ## 2. Fill the template
 
-Copy `resume-template.tex` to `<profile>/resume.tex` (never overwrite an existing one) and follow
+Copy `resume-template.tex` to `<profile>/resume.tex` (never overwrite an existing one), next to
+the original file. `facts.md` goes there too. Both belong to the profile, not to this
+application, even when the user asked for output in another folder: the tailored `resume.tex`
+is written there later and must not replace the master. Then follow
 the instructions at the top of the template. In short: the person's exact words, their section
 order and headings, one block per job, project or degree, special characters escaped, every
 `{{placeholder}}` and example address replaced or the line deleted.

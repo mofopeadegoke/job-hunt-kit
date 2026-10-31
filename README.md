@@ -2,10 +2,11 @@
 
 A Claude Code plugin that helps you get more interviews **without exaggerating anything**.
 
-It tailors your LaTeX resume to a job posting so applicant tracking systems (ATS) read it correctly
-and match it to the role, using only facts you have confirmed. It tells you plainly when a job is a
-long shot. And it keeps your application log, so you know who to follow up with and what your
-interview rate really is.
+It tailors your resume (LaTeX, PDF or Word) to a job posting so applicant tracking systems (ATS)
+read it correctly and match it to the role, using only facts you have confirmed. You get back a
+LaTeX file to turn into a PDF in Overleaf, with no LaTeX install needed. It tells you plainly when
+a job is a long shot. And it keeps your application log, so you know who to follow up with and
+what your interview rate really is.
 
 ```
 /plugin install job-hunt-kit --marketplace mofopeadegoke/job-hunt-kit
@@ -34,7 +35,9 @@ These beat anything a job posting asks for:
 - **Bad odds are said out loud.** Visa, location, time-zone and language requirements you don't
   meet stop the tailoring until you say to go on. Years or seniority you're short on are reported
   plainly.
-- A requirement your facts don't support is reported as a **gap**, never added.
+- A requirement your facts don't support is reported as **Missing**, never added.
+- **A PDF or Word resume is copied word for word first.** The plugin checks the LaTeX copy has
+  exactly the same words and links as your file, and you confirm it before any tailoring.
 
 ## Install
 
@@ -53,21 +56,38 @@ claude plugin install job-hunt-kit@job-hunt-kit
 
 Update later with `claude plugin update job-hunt-kit@job-hunt-kit`.
 
-**Needs:** Python 3 (for the scripts and the reminder). **Optional:** a LaTeX engine (`latexmk`,
-`pdflatex` or `tectonic`) and `pdftotext` (from Poppler) so the plugin can compile your resume and
-check what an ATS sees. Without them it checks the `.tex` source instead and says so.
+**Needs:** Python 3 (for the scripts and the reminder).
+
+**Recommended:** `pdftotext` and `pdfinfo` from [Poppler](https://poppler.freedesktop.org/), to
+read a PDF resume (including links hidden behind words like "LinkedIn") and to check what an ATS
+sees. On Windows: `winget install oschwartz10612.Poppler`; macOS: `brew install poppler`; Linux:
+the `poppler-utils` package.
+
+**Optional:**
+- A LaTeX engine (`latexmk`, `pdflatex` or `tectonic`) to compile and check the PDF on your
+  machine. Without one, compile in Overleaf; the plugin checks the `.tex` source and says so.
+- [LibreOffice](https://www.libreoffice.org/), only for old `.doc` files. Without it, save the
+  file as `.docx` or PDF and use that.
+
+`.docx` files need nothing extra.
 
 ## Quick start
 
-1. **Make a profile folder** with two files:
-   - `resume.tex`: your master resume.
-   - `facts.md`: everything true about you that a resume may use, each fact with an ID, plus a
-     **Never claim** list. If you don't have one, the plugin drafts it from your resume for you to
-     check and confirm. See [the profile format](plugins/job-hunt-kit/skills/ats-optimize/references/profile-format.md)
-     and the [Jane Doe example](fixtures/jane-doe/facts.md).
+1. **Make a profile folder** and put your resume in it: `resume.tex`, or a PDF or Word file
+   (`.pdf`, `.docx`, `.doc`).
 2. **Open Claude Code in that folder** and share a job posting: "Tailor my resume for this job".
-   Everything lands in `applications/<date>-<company>-<role>/`. Your master resume is never edited.
-3. **After you apply**, say "I applied, log it". Tell Claude when you hear back. Ask who to follow
+   - **The first time, with a PDF or Word resume,** the plugin copies it into `resume.tex` (the
+     same words in an ATS-safe layout) and drafts `facts.md`: everything true about you that a
+     resume may use, each fact with an ID, plus a **Never claim** list of things you haven't done.
+     It asks you a few questions in the chat. Check both files and answer; this happens once.
+     See [the profile format](plugins/job-hunt-kit/skills/ats-optimize/references/profile-format.md)
+     and the [Jane Doe example](fixtures/jane-doe/facts.md).
+   - **Every job after that,** you get a folder `applications/<date>-<company>-<role>/` with the
+     tailored `resume.tex` and `report.html` (open it in your browser). Your master resume is
+     never edited.
+3. **Get the PDF:** in [Overleaf](https://www.overleaf.com), New Project → Blank Project, replace
+   all of `main.tex` with the tailored `resume.tex`, click Recompile, then Download PDF.
+4. **After you apply**, say "I applied, log it". Tell Claude when you hear back. Ask who to follow
    up with.
 
 ## Why these rules: the research
@@ -92,7 +112,7 @@ around contact separators, visible space between entries, one page, hyphenation 
 ## Does it work? Evals
 
 The plugin ships with an eval suite (`plugins/job-hunt-kit/evals/`, run with `claude plugin eval`):
-10 cases with fictional candidate Jane Doe and fictional job postings, each scored by regex checks
+11 cases with fictional candidate Jane Doe and fictional job postings, each scored by regex checks
 on the files produced and by an LLM judge on the reply.
 
 **Plugin vs plain Claude** (Claude Sonnet, 3 runs each, identical checks; plain Claude gets the
@@ -107,7 +127,8 @@ Plain Claude kept employer titles and invented no skills, but in every run it at
 to TypeScript (the resume shows about 2.5 years at an employer), left freelance work under
 Projects, and never warned about the shortfall.
 
-The other cases (all 1.00 on Sonnet) check that it stops on a job the candidate can't legally take,
+The other cases (all 1.00 on Sonnet) check that it turns a PDF resume into LaTeX word for word and
+asks you to confirm it before tailoring, stops on a job the candidate can't legally take,
 removes overclaims already in a master resume, stays out of unrelated edits, logs applications
 without inventing fields, counts interviews correctly, and never marks an application "ghosted"
 without asking.
@@ -128,7 +149,7 @@ own folder.
 ## Development
 
 ```
-python -m unittest discover tests            # 53 unit tests for the scripts
+python -m unittest discover tests            # 103 unit tests for the scripts
 claude plugin eval plugins/job-hunt-kit --scaffold --allow-tools Write Edit --model sonnet --judge-model sonnet
 claude plugin validate --strict plugins/job-hunt-kit
 ```

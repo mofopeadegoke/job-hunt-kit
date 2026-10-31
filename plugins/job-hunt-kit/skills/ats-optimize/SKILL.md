@@ -77,8 +77,8 @@ rules by reading the `.tex` against rules.md, and say in the report that the scr
   result is a summary or cut short, ask the user to paste the full posting.
 - **Application folder:** the folder the user names, else create
   `<profile>/applications/<YYYY-MM-DD>-<company>-<role>/` (lowercase, hyphens). Save the posting
-  there as `job.txt`. All output goes here; the master
-  `resume.tex` stays untouched.
+  there as `job.txt`. All output for this job goes here. The master `resume.tex` and `facts.md`
+  live in the profile folder, including ones just converted or drafted, and stay untouched.
 
 Done when the profile is confirmed and the full posting is saved.
 
